@@ -1,4 +1,7 @@
-:root {
+@use '../style/mixins.scss' as m;
+@use '../style/variables.scss' as v;
+
+/* :root {
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
@@ -38,7 +41,7 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
-}
+} */
 
 
 * {
@@ -50,12 +53,18 @@
 html,
 body {
   max-width: 100vw;
+  background-color: v.$base-color;
+  color: v.$accent-color1;
+  @include m.baseText;
+
+
+  a, button{
+    @include m.buttonOrlink;
+
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+
 
 @media (prefers-color-scheme: dark) {
   html {
