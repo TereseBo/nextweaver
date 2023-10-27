@@ -8,9 +8,7 @@ export default function WeaverBaseLayout({
 }) {
     return (
         <>
-            <header >
-                <div>Nav goes here</div>
-            </header>
+
             <main>{children}</main>
             <footer></footer>
         </>
