@@ -1,4 +1,4 @@
-import { Colorinput } from '@/components/tinyBits/Colorinput'
+import { Colorinput } from '@/components/forms/Colorinput'
 import { logger } from '@/functions/logger'
 
 export function ColorPicker({ }) {

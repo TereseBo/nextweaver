@@ -1,7 +1,7 @@
 import './page.scss'
 
-import { Cell } from '@/components/tinyBits/Cell'
-import { Colorinput } from '@/components/tinyBits/Colorinput'
+import { Cell } from '@/components/draft/Cell'
+import { Colorinput } from '@/components/forms/Colorinput'
 import { logger } from '@/functions/logger'
 
 
