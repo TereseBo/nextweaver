@@ -1,5 +1,4 @@
-
-import "./Cell.scss";
+import './Cell.scss';
 export function Cell(params:{color:string|undefined}){
     const {color}=params
     

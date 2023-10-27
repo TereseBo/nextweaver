@@ -1,4 +1,4 @@
 'use client'
-export function clicketyclack(e: any) {
+export function logger(e: any) {
     console.log(e.target.value)
 }

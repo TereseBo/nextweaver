@@ -1,4 +1,4 @@
-import "./treadling.scss";
+import './treadling.scss';
 
 export function Treadling(){
     

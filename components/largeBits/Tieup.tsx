@@ -1,4 +1,4 @@
-import "./tieup.scss";
+import './tieup.scss';
 
 export function Tieup(){
     

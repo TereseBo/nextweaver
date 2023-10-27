@@ -1,4 +1,4 @@
-import "./weave.scss";
+import './weave.scss';
 
 export function Weave(){
     
