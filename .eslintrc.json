@@ -5,9 +5,16 @@
     "simple-import-sort"
   ],
   "rules": {
-    // increase the severity of rules so they are auto-fixable
+    // increase the severity of sortingrules so they are auto-fixable
     "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/exports": "error",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ]
   },
   "overrides": [
     // override 'simple-import-sort' original-config
@@ -22,12 +29,10 @@
         "simple-import-sort/imports": [
           "error",
           {
-            "groups": [
-              // Style imports first.
+            "groups": [ //Sorted: style, react, other externat imports, components, functions other internal imports
               [
                 "^.+\\.?(scss)$"
               ],
-              // Packages `react` related packages come first.
               [
                 "^react",
                 "^@?\\w"
@@ -35,15 +40,12 @@
               [
                 "external"
               ],
-              // Internal packages.
               [
                 "^(@|components)(/.*|$)"
               ],
-              // Side effect imports.
               [
                 "^(@|functions)(/.*|$)"
               ],
-              // Other relative imports. Put same-folder imports and `.` last.
               [
                 "^\\./(?=.*/)(?!/?$)",
                 "^\\.(?!/?$)",
