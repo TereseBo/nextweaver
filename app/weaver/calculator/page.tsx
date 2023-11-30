@@ -1,7 +1,9 @@
-export default function CalculatorPage(){
+import { Header } from '@/components/zSharedComponents/Header'
+export default function CalculatorPage() {
     return (
-        <div>
-        Calculatorpage, good job
+        <div id='calculator-page'>
+            <Header title="Welcome to the calculator!" text="Start to fill in the form and it will update as you write." />
+            Calculatorpage, good job
         </div>
     )
 }

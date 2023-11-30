@@ -1,5 +1,6 @@
 import './colorpicker.scss'
-import { Colorinput } from '@/components/forms/Colorinput'
+
+import { Colorinput } from '@/components/zSharedComponents/Colorinput'
 import { logger } from '@/functions/logger'
 
 export function ColorPicker({ }) {

@@ -1,6 +1,6 @@
 import './draft.scss'
 
-import { Grid } from '@/components/draft/Grid'
+import { Grid } from '@/components/draft/draft/Grid'
 
 export function Draft() {
     const weaveTemplate: string[][] = new Array(50).fill(new Array(20).fill('', 0))

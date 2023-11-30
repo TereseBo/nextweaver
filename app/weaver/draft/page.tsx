@@ -1,7 +1,7 @@
 'use client'
-import { Draft } from '@/components/draft/Draft'
-import { ColorPicker } from '@/components/forms/Colorpicker'
-import {Header} from '@/components/page/Header'
+import { Draft } from '@/components/draft/draft/Draft'
+import { ColorPicker } from '@/components/draft/forms/Colorpicker'
+import { Header } from '@/components/zSharedComponents/Header'
 export default function DraftPage() {
 
     const dataTemplate: string[][] = new Array(50).fill(new Array(20).fill('', 0))

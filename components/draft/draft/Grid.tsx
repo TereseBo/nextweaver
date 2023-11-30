@@ -1,6 +1,6 @@
 import './grid.scss';
 
-import { Row } from '@/components/draft/Row'
+import { Row } from '@/components/draft/draft/Row'
 
 export function Grid(props: { content: string[][], type: string }) {
     const mycontent = [...props.content]

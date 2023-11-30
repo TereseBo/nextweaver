@@ -7,8 +7,9 @@ export function Header(params:{title:string, text:string}){
             <h1>{title}</h1>
             <p>{text}</p>
             <nav className="nav-bar">
-                <a>Calculator</a>
-                <a>Settings</a>
+                <a href="/weaver/draft">Draft</a>
+                <a href="/weaver/calculator">Calculator</a>
+                <a href="/weaver">Settings</a>
 
             </nav>
         </header>
