@@ -5,8 +5,8 @@ import { logger } from '@/functions/logger'
 
 export function ColorPicker({ }) {
     return (
-        <form id='colorpick-form'>
-            <div className='form-content-container'>
+        <div className='form-container'>
+            <form id='colorpick-form' >
                 <div>
                     <p>
                         Pick a color and click <br />
@@ -37,7 +37,7 @@ export function ColorPicker({ }) {
                         </div>
                     </div>
                 </div>
-            </div>
-        </form >
+            </form>
+        </div >
     )
 }

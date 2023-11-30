@@ -2,7 +2,7 @@
 @use '../../../style/variables.scss' as v;
 
 
-#colorpick-form {
+.form-container {
     display: flex;
     flex-direction: column;
 
@@ -10,12 +10,12 @@
         font-size: 0.8rem;
     }
 
-    h3 {
-        margin: 0 0 0.2rem 0;
+     h3 {
+        margin: 0 0 0.3rem 0;
         padding: 0;
-    }
+    } 
 
-    .form-content-container {
+    #colorpick-form {
 
         border: v.$thick-border;
         @include m.text-area;
