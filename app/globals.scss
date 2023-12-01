@@ -65,45 +65,53 @@ body {
     @include m.buttonOrlink;
 
   }
+
   form {
     @include m.text-area;
+    @include m.flexColumn;
     box-sizing: border-box;
     padding: 1.5rem;
 
-  label {
-    margin: 0;
-    white-space: nowrap;
-  }
+    gap: 1rem;
+    margin: 1rem;
 
-  input {
-    margin: 0 0.2rem 0 0.2rem;
-    padding: 0.2rem 0.2rem 0 0.2rem;
-    background-color: v.$secondary-color;
-    @include m.underline-input;
-
-    &:focus {
-      outline: none;
-      background-color: v.$base-color;
-      border-radius: 1.5px 1.5px 0 0;
-    }
-
-    /*Spinbutton removal Chrome*/
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
+    label {
       margin: 0;
+      white-space: nowrap;
     }
 
-    /* Spinbutton removal Firefox */
-    &[type=number] {
-      -moz-appearance: textfield;
-      appearance: textfield;
-    }
-  }
+    input {
+      margin: 0 0.2rem 0 0.2rem;
+      padding: 0.2rem 0.2rem 0 0.2rem;
+      background-color: v.$secondary-color;
+      @include m.underline-input;
 
-  .form-header {
-    @include m.form-header;
-}
+      &:focus {
+        outline: none;
+        background-color: v.$base-color;
+        border-radius: 1.5px 1.5px 0 0;
+      }
+
+      /*Spinbutton removal Chrome*/
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Spinbutton removal Firefox */
+      &[type=number] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+      }
+    }
+
+    .form-header {
+      @include m.form-header;
+      @include m.flexColumn;
+      margin: 0 0 1rem 0;
+
+    }
   }
 }
 

@@ -6,9 +6,8 @@ import { Formsection } from './Formsection'
 export function Warpwidthform(){
 
     return(
-        <form className="info-form">
-            <label className="form-header">Warp width</label>
-
+        <form id="warplength-form">
+            <h3 className="form-header">Warp width</h3>
 
             <Formsection>
                 <label>Reed:</label>
@@ -16,8 +15,6 @@ export function Warpwidthform(){
                 /
                 <input type="number" id="heddle-spec" name="heddle" min="1" max="100" value="10"/> cm
             </Formsection>
-
-
 
             <Formsection>
                 <label>Threding:</label>

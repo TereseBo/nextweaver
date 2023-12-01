@@ -1,0 +1,26 @@
+@use '../../style/mixins.scss' as m;
+@use '../../style/variables.scss' as v;
+
+.item-data {
+    @include m.flexColumn;
+    margin: 0%;
+    border: v.$thin-border;
+    border-style: solid none none none;
+
+
+    h6 {
+        margin: 0;
+        padding-top: 1rem;
+    }
+
+    &:last-child {
+        border-bottom-style: solid;
+    }
+
+    .data {
+
+        &:last-child {
+            padding-bottom: 1rem;
+        }
+    }
+}
