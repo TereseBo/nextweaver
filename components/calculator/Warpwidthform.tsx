@@ -1,65 +1,66 @@
+//Form for performing weave with calculations
 'use client'
 import './warpwidthform.scss'
 
-import {  useState } from 'react'
+import { useState } from 'react'
 
-import { calculateWarpWidth} from '@/functions/calculator/warpwidth'
+import { calculateWarpWidth } from '@/functions/calculator/warpwidth'
 
 import { Formsection } from './Formsection'
 
-
-
 export function Warpwidthform() {
-    const [formData, setFormData] = useState(
+    const [reedData, setReedData] = useState(
         {
-            reed: {
-                dents: 50,
-                section: 10,
-                tph:1,
-                tpd:2,
-            },
-            warp: {
+            dents: 50,
+            section: 10,
+            tph: 1,
+            tpd: 2,
+        },
 
-                ends: 750,
-                epc: 10,
-                width: 100,
-            }
-        }
     )
+    const [warpData, setWarpData] = useState(
+        {
+
+            ends: 750,
+            epc: 10,
+            width: 75,
+        }
+
+    )
+    const [weftEpc, setWeftEpc]= useState(10)
 
     function bob(e: React.ChangeEvent<HTMLFormElement>) {
-        
+
         console.log(e.target.value)
         console.log(e.target.id)
-        
-        const newval=+e.target.value
-        const fieldId=e.target.id
-        const newData={...formData}
-        const sec=calculateWarpWidth(fieldId, newval, newData)
-        
-        console.log(newData)
-        setFormData(sec)
- 
+
+        const inputval = +e.target.value
+        const fieldId = e.target.id
+        const warp = JSON.stringify(warpData);
+        const reed = JSON.stringify(reedData)
+        const sec = calculateWarpWidth(fieldId, inputval, {...warpData}, {...reedData},)
+        setReedData(sec['reed'])
+        setWarpData(sec['warp'])
+
     }
-
-
+   
     return (
         <form id="warpwidth-form" onChange={bob} >
             <h3 className="form-header">Warp width</h3>
 
             <Formsection>
                 <label>Reed:</label>
-                <input type="number" id="dents" name="dents" min="1" max="100" defaultValue={formData.reed.dents} />
+                <input type="number" id="dents" name="dents" min="1" max="100"  value={reedData.dents}  onChange={(e)=>bob} />
                 /
-                <input type="number" id="section" name="section" min="1" max="100" defaultValue={formData.reed.section} /> cm
+                <input type="number" id="section" name="section" min="1" max="100"  value={reedData.section} onChange={(e)=>bob} /> cm
             </Formsection>
 
             <Formsection>
                 <label>Threding:</label>
-                <input type="number" id="tph" name="" min="1" max="10" defaultValue={formData.reed.tph} />
+                <input type="number" id="tph" name="" min="1" max="10"  value={reedData.tph} onChange={(e)=>bob} />
 
                 <label htmlFor="tph">/heddle </label>
-                <input type="number" id="tpd" name="tpd" min="1" max="10" defaultValue={formData.reed.tpd}  />
+                <input type="number" id="tpd" name="tpd" min="1" max="10" value={reedData.tpd}  onChange={(e)=>bob} />
                 <label htmlFor="tpd">/dent </label>
             </Formsection>
 
@@ -68,9 +69,9 @@ export function Warpwidthform() {
             <Formsection>
                 <label>Ends/cm:</label>
                 <label htmlFor="epc">warp </label>
-                <input type="number" id="epc" name="epc" min="1" max="100" defaultValue={formData.warp.epc} />
+                <input type="number" id="epc" name="epc" min="1" max="100"  value={+warpData.epc} onChange={(e)=>bob} />
                 <label htmlFor="weft-epc">weft </label>
-                <input type="number" id="weft-epc" name="weft-epc" min="1" max="100" value="10" />
+                <input type="number" id="weft-epc" name="weft-epc" min="1" max="100" defaultValue="10" onChange={(e)=>setWeftEpc(+e.target.value)}/>
             </Formsection>
 
 
@@ -78,14 +79,14 @@ export function Warpwidthform() {
             <Formsection>
                 <label>Ends total:</label>
                 <label htmlFor="ends">threads </label>
-                <input type="number" id="ends" name="ends" min="1" max="2000" defaultValue={formData.warp.ends} />
+                <input type="number" id="ends" name="ends" min="1" max="2000"  value={warpData.ends}  onChange={(e)=>bob} />
             </Formsection>
 
 
 
             <Formsection>
                 <label>Weave width:</label>
-                <input type="number" id="width" name="width" min="1" max="300" defaultValue={formData.warp.width} />
+                <input type="number" id="width" name="width" min="1" max="10000" value={warpData.width }  onChange={(e)=>bob} />
                 <label htmlFor="width">cm </label>
             </Formsection>
 

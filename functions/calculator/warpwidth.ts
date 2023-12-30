@@ -1,11 +1,13 @@
+//Functions for handeling individual calculations of weave width and function for associated form 
 'use client'
 import { Reed } from '@/types/reed'
 import { warpWidthData } from '@/types/warp'
 
-export function calculateWarpWidth(target: string, value: number, data: { warp: warpWidthData, reed: Reed }) {
-    const newData = { data }
-    const warp = data.warp
-    const reed = data.reed
+export function calculateWarpWidth(target: string, value: number, warpin: warpWidthData, reedin: Reed/*data:  { warp: warpWidthData, reed: Reed } */) {
+
+    const warp = {...warpin}
+    const reed = {...reedin}
+
     switch (target) {
         //Warp data
         case ('ends'):
@@ -42,7 +44,7 @@ export function calculateWarpWidth(target: string, value: number, data: { warp: 
     }
     //TODO: Add function to check if reed is compatible with sett
 
-    return { warp: warp, reed: reed }
+    return { warp, reed }
 
 }
 
