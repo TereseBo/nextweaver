@@ -16,36 +16,28 @@ export function Warpwidthform() {
             tph: 1,
             tpd: 2,
         },
-
     )
     const [warpData, setWarpData] = useState(
         {
-
             ends: 750,
             epc: 10,
             width: 75,
         }
-
     )
     const [weftEpc, setWeftEpc]= useState(10)
-
+    
+    //Recalculates and updates state on change in form
     function bob(e: React.ChangeEvent<HTMLFormElement>) {
 
-        console.log(e.target.value)
-        console.log(e.target.id)
-
-        const inputval = +e.target.value
+        const inputValue = +e.target.value
         const fieldId = e.target.id
-        const warp = JSON.stringify(warpData);
-        const reed = JSON.stringify(reedData)
-        const sec = calculateWarpWidth(fieldId, inputval, {...warpData}, {...reedData},)
-        setReedData(sec['reed'])
-        setWarpData(sec['warp'])
-
+        const newState = calculateWarpWidth(fieldId, inputValue, {...warpData}, {...reedData},)
+        setReedData(newState['reed'])
+        setWarpData(newState['warp'])
     }
    
     return (
-        <form id="warpwidth-form" onChange={bob} >
+        <form id="warpwidth-form" onChange={bob} name="warpwidth-form" >
             <h3 className="form-header">Warp width</h3>
 
             <Formsection>
@@ -64,8 +56,6 @@ export function Warpwidthform() {
                 <label htmlFor="tpd">/dent </label>
             </Formsection>
 
-
-
             <Formsection>
                 <label>Ends/cm:</label>
                 <label htmlFor="epc">warp </label>
@@ -74,15 +64,11 @@ export function Warpwidthform() {
                 <input type="number" id="weft-epc" name="weft-epc" min="1" max="100" defaultValue="10" onChange={(e)=>setWeftEpc(+e.target.value)}/>
             </Formsection>
 
-
-
             <Formsection>
                 <label>Ends total:</label>
                 <label htmlFor="ends">threads </label>
                 <input type="number" id="ends" name="ends" min="1" max="2000"  value={warpData.ends}  onChange={(e)=>bob} />
             </Formsection>
-
-
 
             <Formsection>
                 <label>Weave width:</label>
@@ -92,6 +78,4 @@ export function Warpwidthform() {
 
         </form>
     )
-
-
 }

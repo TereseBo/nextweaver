@@ -1,9 +1,12 @@
 //Functions for handeling individual calculations of weave width and function for associated form 
 'use client'
 import { Reed } from '@/types/reed'
-import { warpWidthData } from '@/types/warp'
+import { WarpWidthData } from '@/types/warp'
 
-export function calculateWarpWidth(target: string, value: number, warpin: warpWidthData, reedin: Reed/*data:  { warp: warpWidthData, reed: Reed } */) {
+import { isZeroish } from '../utils/isZeroish'
+import { roundToTwoDec } from '../utils/roundToTwo'
+
+export function calculateWarpWidth(target: string, value: number, warpin: WarpWidthData, reedin: Reed/*data:  { warp: warpWidthData, reed: Reed } */) {
 
     const warp = {...warpin}
     const reed = {...reedin}
@@ -74,10 +77,5 @@ function calculateEpcFromReed(dents: number, section: number, tpd: number) {
     }
     return Math.round((dents / section) * tpd);
 }
-function isZeroish(number: number) {
-    return number == 0;
-}
-function roundToTwoDec(nr: number) {
-    return Math.round(nr * 100) / 100;
-}
+
 

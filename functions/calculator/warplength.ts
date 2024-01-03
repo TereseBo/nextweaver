@@ -1,16 +1,17 @@
-'use-client'
-import { WarpLengthData } from "@/types/warp"
-import { Item } from "@/types/item"
-import { roundToTwoDec } from "../utils/roundToTwo"
-export function calculateWarpLength(warpLengthData:WarpLengthData){
+'use client'
+import { Item } from '@/types/item'
+import { WarpLengthData } from '@/types/warp'
+
+import { roundToTwoDec } from '../utils/roundToTwo'
+export function calculateWarpLength(warpLengthData:WarpLengthData):number{
         const {lash_on, waste, shrinkage, take_up, items}= warpLengthData
         let fixedLength = calculateFixedLength(lash_on, waste);
         let itemsLength = undefined
 
         items.length>0? itemsLength=calculateItemLengths(items, take_up, shrinkage ):itemsLength=0
         
-        return warpLength(fixedLength, itemsLength)
-
+        const total= warpLength(fixedLength, itemsLength)
+        return roundToTwoDec(total)
 
 }
 
@@ -20,7 +21,8 @@ function calculateItemLengths( items:Item[], take_up:number, shrinkage: number):
     const combinedLength:number=itemLengths.reduce((a,b)=>a+b,0)
     const afterWeave=combinedLength*(1+take_up/100)
     const afterWash=afterWeave*(1+shrinkage/100)
-    return afterWash
+    
+    return roundToTwoDec(afterWash)
 }
 function calculateFixedLength( ...fixed:number[]){//sums all params
     let sum = fixed.reduce((a,b)=>Number(a)+Number(b),0)

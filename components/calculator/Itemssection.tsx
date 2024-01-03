@@ -16,16 +16,16 @@ export function Itemssection(params:{nrofitems:number }){
                     <h6>Item</h6>
     
                     <Formsection>
-                        <label htmlFor="width">Item length:</label>
+                        <label htmlFor="length">Item length:</label>
                         <input type="number" data-unit="cm" id="length" name="length" min="1" max="10000" value="100"/> cm
                     </Formsection>
                     <Formsection>
-                        <label htmlFor="width">Fringe / hem:</label>
+                        <label htmlFor="firsthem">Fringe / hem:</label>
                         <input type="number" data-unit="cm" id="firsthem" name="firsthem" min="1" max="99" value="10"/>
                             cm
                     </Formsection>
                     <Formsection>
-                        <label htmlFor="width">Fringe / hem:</label>
+                        <label htmlFor="secondhem">Fringe / hem:</label>
                         <input type="number" data-unit="cm" id="secondhem" name="secondhem" min="1" max="99" value="10"/>
                             cm
                     </Formsection>
