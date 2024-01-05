@@ -8,8 +8,8 @@ import { roundToTwoDec } from '../utils/roundToTwo'
 
 export function calculateWarpWidth(target: string, value: number, warpin: WarpWidthData, reedin: Reed/*data:  { warp: warpWidthData, reed: Reed } */) {
 
-    const warp = {...warpin}
-    const reed = {...reedin}
+    const warp = { ...warpin }
+    const reed = { ...reedin }
 
     switch (target) {
         //Warp data

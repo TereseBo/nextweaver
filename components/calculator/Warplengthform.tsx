@@ -6,7 +6,7 @@ import './warplengthform.scss'
 
 import { useState } from 'react'
 
-import { calculateFinishedItemLength,calculateWarpLength } from '@/functions/calculator/warplength'
+import { calculateFinishedItemLength, calculateWarpLength } from '@/functions/calculator/warplength'
 import { Item } from '@/types/item'
 import { WarpLengthData } from '@/types/warp'
 
@@ -76,7 +76,7 @@ export function Warplengthform() {
             </Formsection>
             <Formsection>
                 <label className="sectionlabel" htmlFor="take_up">Take-up: </label>
-                <input className="sectioninput" type="number" id="take_up" name="take-up" min="1" max="99" value={Number(warpData.take_up).toString()} onChange={(e) => bobby} /> <p className="unit"> %</p>
+                <input className="sectioninput" type="number" id="take_up" name="take_up" min="1" max="99" value={Number(warpData.take_up).toString()} onChange={(e) => bobby} /> <p className="unit"> %</p>
             </Formsection>
             <Formsection>
                 <label className="sectionlabel" htmlFor="shrinkage">Shrinkage: </label>
