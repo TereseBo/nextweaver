@@ -6,7 +6,7 @@ import Page from '@/app/weaver/calculator/page'
 import '@testing-library/jest-dom'
 
 //Tests for header contents
-describe('Header', () => {
+describe('Calculator page header', () => {
 
     it('renders a banner', () => {
         render(<Page />)
@@ -32,7 +32,7 @@ describe('Header', () => {
 })
 
 //Tests for prescence of ecxpected contents 
-describe('content', () => {
+describe('Calculator page content', () => {
     //Tests for main contents in page
     it('renders a correct number of forms', () => {
         render(<Page />)
