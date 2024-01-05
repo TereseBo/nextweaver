@@ -104,6 +104,10 @@ body {
         -moz-appearance: textfield;
         appearance: textfield;
       }
+      &.notMatching{
+        background-color: rgb(241, 165, 165);
+        border-radius: 3px;
+    }
     }
 
     .form-header {
