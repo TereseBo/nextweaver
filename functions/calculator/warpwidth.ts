@@ -5,8 +5,9 @@ import { WarpWidthData } from '@/types/warp'
 
 import { isZeroish } from '../utils/isZeroish'
 import { roundToTwoDec } from '../utils/roundToTwo'
+import { calculateEpcFromReed } from './reed'
 
-export function calculateWarpWidth(target: string, value: number, warpin: WarpWidthData, reedin: Reed/*data:  { warp: warpWidthData, reed: Reed } */) {
+export function calculateWarpWidth(target: string, value: number, warpin: WarpWidthData, reedin: Reed) {
 
     const warp = { ...warpin }
     const reed = { ...reedin }
@@ -41,15 +42,21 @@ export function calculateWarpWidth(target: string, value: number, warpin: WarpWi
             warp.epc = calculateEpcFromReed(reed.dents, reed.section, reed.tpd)
             warp.width = calculateWeaveWidth(warp.ends, warp.epc)
             break;
+        case ('tph'):
+            reed.tph=value
+            break;
         default:
             break;
 
     }
     //TODO: Add function to check if reed is compatible with sett
+    
 
     return { warp, reed }
 
 }
+
+
 
 //Calculations 
 function calculateWeaveWidth(ends: number, epc: number) {
@@ -71,11 +78,6 @@ function calculateWarpEnds(epc: number, width: number) {
     }
     return Math.round(epc * width);
 }
-function calculateEpcFromReed(dents: number, section: number, tpd: number) {
-    if (isZeroish(dents) || isZeroish(section) || isZeroish(tpd)) {
-        return 0;
-    }
-    return Math.round((dents / section) * tpd);
-}
+
 
 

@@ -5,6 +5,39 @@ import { WarpLengthData } from '@/types/warp'
 
 import { roundToTwoDec } from '../utils/roundToTwo'
 
+export function calculateNewWarpLength(target: string, value: any, warpData: WarpLengthData) {
+
+    const inputValue = value
+    const [fieldId, itemId, itemField] = target.split(':')
+    const newWarp = { ...warpData }
+
+    switch (fieldId) {
+        case 'piece':
+            newWarp.items[Number(itemId)][itemField as keyof Item] = inputValue
+            break;
+        case 'items':
+            //creates array with unique item-objects
+            const newItems = new Array(Number(inputValue))
+            for (let i = 0; i < inputValue; newItems[i++] = { length: 50, firsthem: 10, secondhem: 10 });
+            newWarp.items = newItems
+            break;
+        case 'total':
+            newWarp.total = inputValue
+            const nrOfItems = newWarp.items.length
+            if (nrOfItems > 0) {
+                newWarp.items = calculateFinishedItemLength(newWarp)
+            }
+            break;
+        default:
+            newWarp[fieldId as keyof WarpLengthData] = value
+    }
+    if (fieldId !== 'total') {
+        newWarp['total'] = calculateWarpLength(newWarp)
+    }
+
+    return newWarp
+}
+
 //Returns required total warplength for warpdata object, assumes finished length is specefied in items
 export function calculateWarpLength(warpLengthData: WarpLengthData): number {
     const { lash_on, waste, shrinkage, take_up, items } = warpLengthData
@@ -14,8 +47,8 @@ export function calculateWarpLength(warpLengthData: WarpLengthData): number {
     items.length > 0 ? itemsLength = calculateItemWarpLength(items, take_up, shrinkage) : itemsLength = 0
 
     const total = warpLength(fixedLength, itemsLength)
+   
     return Math.floor(total)
-
 }
 
 //Returns required warplength for all items combined, assumes finished length is specefied in items
@@ -42,24 +75,20 @@ export function calculateFinishedItemLength(warpLengthData: WarpLengthData): Ite
     let itemLength = 0
     let itemHem = 0
     const { lash_on, waste, shrinkage, take_up, items, total } = warpLengthData
-    console.log('total going in: ', total)
+
     const nrOfItems = items.length
     const combinedLength = total - lash_on - waste
     if (combinedLength > 0) {
 
-        console.log('combined items going in: ', combinedLength)
         const afterWeaveIn = combinedLength * (1 - take_up / 100)
         const afterWashShrinkage = afterWeaveIn * (1 - shrinkage / 100)
-        console.log('After wash and shrink: ', afterWashShrinkage)
         const perItemTotal = afterWashShrinkage / nrOfItems
-        console.log('per item tpotal:', perItemTotal)
+    
         itemLength = Math.ceil(perItemTotal * 0.8)
         itemHem = Math.floor(perItemTotal * 0.1)
     }
     const calculatedItems: Item[] = new Array(nrOfItems)
     for (let i = 0; i < nrOfItems; calculatedItems[i++] = { length: itemLength, firsthem: itemHem, secondhem: itemHem });
-    console.log('calculated items:')
-    console.log(calculatedItems)
 
     return calculatedItems
 }

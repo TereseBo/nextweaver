@@ -1,6 +1,23 @@
 
 import { Reed } from '@/types/reed';
+import { WarpWidthData } from '@/types/warp';
 
-function calculateEpc(dents: number, section: number, tpd: number): number {
+import { isZeroish } from '../utils/isZeroish';
+
+
+
+export function reedMatch( warp:WarpWidthData,reed:Reed,){
+    let match= true
+    let density= reed.dents/reed.section
+    if (warp.epc%density){
+        match=false
+    }
+    return match
+}
+
+export function calculateEpcFromReed(dents: number, section: number, tpd: number) {
+    if (isZeroish(dents) || isZeroish(section) || isZeroish(tpd)) {
+        return 0;
+    }
     return Math.round((dents / section) * tpd);
 }
