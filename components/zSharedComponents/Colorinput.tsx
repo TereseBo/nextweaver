@@ -1,10 +1,11 @@
 'use client'
-export function Colorinput(params:{id:string, label:string, clickhandler:(e:React.ChangeEvent<HTMLInputElement>)=>void}){
-    const {id, label, clickhandler}=params
+//Colorinput which can handle both on click and change 
+export function Colorinput(params:{id:string, label:string, value:string, clickhandler:undefined|((e:React.MouseEvent<HTMLInputElement>)=>void), changehandler:(e:React.ChangeEvent<HTMLInputElement>)=>void}){
+    const {id, label, value, clickhandler, changehandler}=params
     return (
         <>
             <label htmlFor={id}>{label}</label>
-            <input id={id}  type="color" onChange={(e)=>{clickhandler(e)}} />
+            <input id={id}  type="color" value={value} onChange={(e)=>{changehandler(e)}} onClick={(e)=>{{clickhandler && clickhandler(e)}}} />
         </>
     )
 }
