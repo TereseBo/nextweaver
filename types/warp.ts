@@ -1,14 +1,14 @@
 //Data needed to calculate warp with and length
 
-import {Item} from'./item'
+//import {Item} from'./item'
 
-export type WarpWidthData = {
+type WarpWidthData = {
     ends: number,
     epc: number,
     width: number,
 }
 
-export type WarpLengthData={
+type WarpLengthData={
     waste:number,
     lash_on:number,
     take_up:number,

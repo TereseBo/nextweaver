@@ -1,5 +1,5 @@
 //Information on reed and it's  threading
-export type Reed={
+type Reed={
     dents:number,
     section:number,
     tph:number,

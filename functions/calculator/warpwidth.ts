@@ -1,7 +1,4 @@
 //Functions for handeling individual calculations of weave width and function for associated form 
-import { Reed } from '@/types/reed'
-import { WarpWidthData } from '@/types/warp'
-
 import { isZeroish } from '../utils/isZeroish'
 import { roundToTwoDec } from '../utils/roundToTwo'
 import { calculateEpcFromReed } from './reed'
