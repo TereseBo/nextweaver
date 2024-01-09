@@ -1,5 +1,4 @@
 //Functions for handeling individual calculations of weave width and function for associated form 
-'use client'
 import { Reed } from '@/types/reed'
 import { WarpWidthData } from '@/types/warp'
 
@@ -47,10 +46,7 @@ export function calculateWarpWidth(target: string, value: number, warpin: WarpWi
             break;
         default:
             break;
-
     }
-    //TODO: Add function to check if reed is compatible with sett
-    
 
     return { warp, reed }
 

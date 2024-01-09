@@ -1,4 +1,3 @@
-'use client'
 //Calculations relating to length
 import { Item } from '@/types/item'
 import { WarpLengthData } from '@/types/warp'
@@ -48,7 +47,7 @@ export function calculateWarpLength(warpLengthData: WarpLengthData): number {
 
     const total = warpLength(fixedLength, itemsLength)
    
-    return Math.floor(total)
+    return Math.ceil(total)
 }
 
 //Returns required warplength for all items combined, assumes finished length is specefied in items

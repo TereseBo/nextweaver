@@ -2,7 +2,7 @@
 @use '../../style/variables.scss' as v;
 
 #warplength-form{
-    input:not(#items){
+    input:not(#items, #total){
         width: 2rem;
     }
     #total{

@@ -60,7 +60,7 @@ export function Warpwidthform() {
             <Formsection>
                 <label>Ends/cm:</label>
                 <label htmlFor="epc">warp </label>
-                <input type="number" id="epc" name="epc" min="1" max="100"  value={+Number(warpData.epc).toString()} onChange={(e)=>formChangeHandler} />
+                <input type="number" id="epc" name="epc" min="1" max="100"  value={Number(warpData.epc).toString()} onChange={(e)=>formChangeHandler} />
                 <label htmlFor="weft-epc">weft </label>
                 <input type="number" id="weft-epc" name="weft-epc" min="1" max="100" value={Number(weftEpc).toString()}  onChange={(e)=>setWeftEpc(+e.target.value)}/>
             </Formsection>
