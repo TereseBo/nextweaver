@@ -1,20 +1,30 @@
 import './draft.scss'
 
+import { useContext } from 'react'
+
 import { Grid } from '@/components/draft/draft/Grid'
+import { WeaveContext } from '@/contexts/weavecontext'
 
 export function Draft() {
-    const weaveTemplate: string[][] = new Array(50).fill(new Array(20).fill('', 0))
-    const tredleTemplate: string[][] = new Array(50).fill(new Array(4).fill('', 0))
-    const warpTemplate: string[][] = new Array(4).fill(new Array(20).fill('', 0))
-    const tieupTemplate: string[][] = new Array(4).fill(new Array(4).fill('', 0))
+
+
+    const { weaveGrid, treadleGrid, warpGrid, tieUpGrid } = useContext(WeaveContext) as WeaveContextType
+
+    function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>) {
+        let target = e.target as HTMLInputElement
+        const value = target.value
+        console.log(value)
+
+
+    }
 
     return (
         <div className="draft">
             <div className="partial">
-                <Grid content={weaveTemplate} type='weave' /> <Grid content={tredleTemplate} type='tredle' />
+                <Grid content={weaveGrid} type='weave' /> <Grid content={treadleGrid} type='treadle' />
             </div>
             <div className="partial">
-                <Grid content={warpTemplate} type='warp' /> <Grid content={tieupTemplate} type='tieup' />
+                <Grid content={warpGrid} type='warp' /> <Grid content={tieUpGrid} type='tieup' />
             </div>
         </div>
     )
