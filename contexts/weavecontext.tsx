@@ -1,8 +1,7 @@
 //Context handling information and calculations between different parts (aka treadles, shafts, tieups) of the draft and calculates the weave.
 //dependencies
-import { createContext, 
-  '@babel/core
-  'react';
+import { createContext, useState} from 'react'
+
 
 //exports
 export const WeaveContext = createContext<WeaveContextType | null>(null)
