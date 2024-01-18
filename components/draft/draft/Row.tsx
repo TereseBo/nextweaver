@@ -2,13 +2,12 @@ import './row.scss'
 
 import { Cell } from './Cell';
 export function Row(props: { content: string[], type: string, rownr: number }) {
-    const mycontent = [...props.content]
-
+    
     const { type, rownr } = props
 
-    const rowCells = mycontent.map((item, index) => {
+    const rowCells = props.content.map((item, index) => {
         //TODO: Handle empty item.
-        return <Cell color={item} key={`${index}`} />
+        return <Cell color={item} key={`${index}`} id={`${type}-${index}-${rownr}`} x={index} y={rownr}/>
     })
     return <div className="row" id={`${type}-row-${rownr}`}>{rowCells} </div>
 } 

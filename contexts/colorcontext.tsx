@@ -1,10 +1,10 @@
 //dependencies
-import { createContext, FC, useState } from 'react';
+import { createContext, useState } from 'react';
 
 //exports
 export const ColorContext = createContext<ColorContextType | null>(null)
 
-export function ColorProvider({children}: {children:React.ReactElement}) {
+export function ColorProvider({children}: {children:React.ReactElement|React.ReactElement[]}) {
     const [currentColor, setCurrentColor]=useState<color>('#000000')
 
     return(
@@ -14,7 +14,7 @@ export function ColorProvider({children}: {children:React.ReactElement}) {
     )
 }
 
-
+//TODO:Remove trial-code below
 /* export const ColorProvider: FC<{children: React.ReactElement}> = ({ children }) => {
   const [currentColor, setCurrentColor] = useState<color>('#000000')
 
