@@ -15,6 +15,7 @@ type WarpLengthData={
     total: number
 }
 
+type colorCollection=color[]
 type grid=color[][]
 type gridName='weave' | 'tieup'|'warp'|'treadle'
 type WeaveContextType={
