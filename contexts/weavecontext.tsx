@@ -21,7 +21,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   const [warpingSequence, setWarpingSequence] = useState([])
   const [sleySequence, setSleySequence] = useState([])
-
+//TODO:Make state use current on update
 
   function resizeGrid(gridName: gridName, height: number = draftHeight, width: number = draftWidth) {
     let emptySubArray: string[] = new Array(width).fill('', 0)
@@ -62,6 +62,8 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     }
     return gridCopy as grid
   }
+
+  //Accepts the name and new value of a grid and updates this state accordingly
   function updateState(gridName: gridName, newValue: grid) {
     //Updates the named grid with the supplied value
     switch (gridName) {
@@ -70,18 +72,25 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
         break
       case 'warp':
         setWarpGrid(newValue)
+        reCalculateWeave()
         break
       case 'treadle':
         setTreadleGrid(newValue)
+        reCalculateWeave()
         break
       case 'tieup':
         setTieUpGrid(newValue)
+        reCalculateWeave()
         break
     }
-  }
-  function updateCell(cellId: string, newColor: color) {
-    const [gridName, x, y] = cellId.split('-') as [gridName, number, number]
 
+  }
+
+  //Changes content of grid-array depending on cell-id
+  function updateCell(cellId: string, newColor: color) {
+    //x and y specifies the x and y coordinates in the grid
+    const [gridName, x, y] = cellId.split('-') as [gridName, number, number]
+    console.log(`Grid: ${gridName}, x: ${x} and y: ${y}`)
     let gridCopy = copyGrid(gridName)
 
     if (gridName == 'tieup') {
@@ -91,7 +100,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     if (gridName == 'warp') {
       for (let i = 0; i < shafts; i++) {
         if (i != y) {
-          gridCopy[x][i] = ''
+          gridCopy[i][x] = ''
         }
       }
     }
@@ -99,7 +108,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     if (gridName == 'treadle') {
       for (let i = 0; i < treadles; i++) {
         if (i != x) {
-          gridCopy[i][y] = ''
+          gridCopy[y][i] = ''
         }
       }
     }
@@ -107,9 +116,75 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     gridCopy[y][x] = gridCopy[y][x] == '' ? newColor : ''
 
     updateState(gridName, gridCopy)
+    
   }
   function reCalculateWeave() {
+    let gridCopy = copyGrid('weave')
+    gridCopy.forEach((row, y) => {
+      let weftColor = getWeftColor(y)
+      
+      console.log(weftColor)
+      
+      row.forEach((cell, x) => {
 
+        let warpColor = getWarpColor(x)
+        console.log(warpColor)
+
+        if(!weftColor){
+          //Set each cell with warpcolor to warpcolor, no color if no warp
+          warpColor?gridCopy[y][x]=warpColor:gridCopy[y][x]=''
+        }else{
+          
+          if(warpColor){
+            let treadleNr=treadleGrid[y].indexOf(weftColor)
+            let shaftNr=getWarpedShaft(x)
+            //Check tie-up on pos y/x if colored set weft otherwise warp
+            isTiedUp(shaftNr,treadleNr)?gridCopy[y][x]=weftColor:gridCopy[y][x]=warpColor
+
+          }else{
+            //No warp but weftcolor displays weft
+            gridCopy[y][x]=weftColor
+          }
+          
+        }
+
+      })
+
+    })
+    updateState('weave', gridCopy)
+  }
+
+  function isTiedUp(shaft:number, treadle:number){
+    return tieUpGrid[shaft][treadle]!=''
+
+  }
+  function isColored(gridItem: color) {
+
+    return gridItem !== '';
+  }
+  function getWeftColor(y: number) {
+    let color= treadleGrid[y].find(isColored)
+    return color
+
+  }
+  function getWarpColor(x: number) {
+    let warpColumn = []
+    for (let i = 0; i < shafts; i++) {
+      warpColumn.push(warpGrid[i][x])
+
+    }
+    let warp=warpColumn.find(isColored)
+    return warp
+  }
+
+  function getWarpedShaft(x: number) {
+   
+    for (let i = 0; i < shafts; i++) {
+      if(warpGrid[i][x]!=''){
+        return i
+      }
+    }
+    return -1
   }
 
   //returns a set of the colors used in a grid 
