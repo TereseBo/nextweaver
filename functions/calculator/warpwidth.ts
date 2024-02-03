@@ -44,12 +44,8 @@ export function calculateWarpWidth(target: string, value: number, warpin: WarpWi
         default:
             break;
     }
-
     return { warp, reed }
-
 }
-
-
 
 //Calculations 
 function calculateWeaveWidth(ends: number, epc: number) {
@@ -59,12 +55,14 @@ function calculateWeaveWidth(ends: number, epc: number) {
 
     return roundToTwoDec(ends / epc);
 }
-function calculateWarpEpc(ends: number, width: number) {
+
+export function calculateWarpEpc(ends: number, width: number) {
     if (isZeroish(ends) || isZeroish(width)) {
         return 0;
     }
     return Math.round(ends / width);
 }
+
 function calculateWarpEnds(epc: number, width: number) {
     if (isZeroish(epc) || isZeroish(width)) {
         return 0;
