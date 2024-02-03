@@ -19,10 +19,13 @@ type colorCollection=color[]
 type grid=color[][]
 type gridName='weave' | 'tieup'|'warp'|'treadle'
 type WeaveContextType={
-    weaveGrid:grid,
+    //weaveGrid:grid,
     treadleGrid:grid,
     warpGrid:grid,
     tieUpGrid: grid,
+    draftHeight:number,
+    draftWidth: number,
+    shafts:number,
     updateCell:(cellId:string, newColor:color)=>void
 /*     resizeGrid:(gridName:string, width:number, height:number)=> void,
     updateGrid:(x:number, y:number, color:color)=> void, */
