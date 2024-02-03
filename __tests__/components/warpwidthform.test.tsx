@@ -8,6 +8,8 @@ import '@testing-library/jest-dom'
 
 describe('Renders form', () => {
 
+    //TODO:Add expected data
+
     it('renders the form', () => {
         render(<Warpwidthform />)
 
@@ -15,4 +17,23 @@ describe('Renders form', () => {
         expect(form.length).toBe(1)
         expect(form[0]).toBeInTheDocument()
     })
+
+
+    it('renders expected input', () => {
+        render(<Warpwidthform />)
+
+        const inputs: HTMLInputElement[] = screen.getAllByRole('spinbutton', {})
+        expect(inputs.length).toBe(8)
+
+        //TODO: Add check of values
+
+    })
+
+    
 })
+
+//Tests for interactions with form
+/* describe('content', () => {
+    
+    it('', () => {
+  */
