@@ -5,8 +5,8 @@ import { calculateEpcFromReed } from './reed'
 
 export function calculateWarpWidth(target: string, value: number, warpin: WarpWidthData, reedin: Reed) {
 
-    const warp = { ...warpin }
-    const reed = { ...reedin }
+    const warp = JSON.parse(JSON.stringify(warpin))
+    const reed = JSON.parse(JSON.stringify(reedin))
 
     switch (target) {
         //Warp data

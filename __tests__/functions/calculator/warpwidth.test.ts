@@ -1,27 +1,85 @@
-import {calculateWarpWidth} from '@/functions/calculator/warpwidth'
-import { WarpWidthData } from '@/types/warp'
+import { calculateWarpWidth } from '@/functions/calculator/warpwidth'
 
 
 describe('Basic calculations return expected result', () => {
- const testWarp:WarpWidthData={
-    epc:5,
-    ends:500,
-    width:100
- }
- const testReed={
-    dents:0,
-    section:0,
-    tph:0,
-    tpd:0
+   const testWarp: WarpWidthData = {
+      epc: 5,
+      ends: 500,
+      width: 100
+   }
+   const testReed = {
+      dents: 50,
+      section: 10,
+      tph: 1,
+      tpd: 1
 
- }
-    it('Epc from reed', () => {
-        
+   }
+   //Tests of calculations starting from warp
+   it('Width from ends', () => {
+      const { warp, reed } = calculateWarpWidth('ends', 600, testWarp, testReed)
+      expect(warp.width).toBe(120)
+      expect(warp.ends).toBe(600)
+      expect(warp.epc).toBe(testWarp.epc)
+      expect(reed).toStrictEqual(testReed)
+   })
+   it('With from epc', () => {
+      const { warp, reed } = calculateWarpWidth('epc', 10, testWarp, testReed)
+      expect(warp.width).toBe(50)
+      expect(warp.epc).toBe(10)
+      expect(warp.ends).toBe(testWarp.ends)
+      expect(reed).toStrictEqual(testReed)
 
-        const {warp, reed}=calculateWarpWidth('epc', 10,testWarp, testReed )
-        expect(warp.width).toBe(50)
+   })
+   it('Ends from from width', () => {
+      const { warp, reed } = calculateWarpWidth('width', 75, testWarp, testReed)
+      expect(warp.width).toBe(75)
+      expect(warp.epc).toBe(testWarp.epc)
+      expect(warp.ends).toBe(375)
+      expect(reed).toStrictEqual(testReed)
 
-    })
+   })
+
+   //Tests of calculations starting from reed
+   it('Width from dents', () => {
+      const { warp, reed } = calculateWarpWidth('dents', 30, testWarp, testReed)
+      //warp comparisons
+      expect(warp.epc).toBe(3)
+      expect(warp.width).toEqual(166.67)
+      expect(warp.ends).toBe(testWarp.ends)
+      //reed comparisons
+      expect(reed.dents).toBe(30)
+      expect(reed.section).toBe(testReed.section    )
+      expect(reed.tph).toBe(testReed.tph)
+      expect(reed.tpd).toBe(testReed.tpd)
+   })
+
+   it('Width from section', () => {
+      const { warp, reed } = calculateWarpWidth('section', 5, testWarp, testReed)
+      //warp comparisons
+      expect(warp.epc).toBe(10)
+      expect(warp.width).toBe(50)
+      expect(warp.ends).toBe(testWarp.ends)
+      //reed comparisons
+      expect(reed.section).toBe(5)
+      expect(reed.dents).toBe(testReed.dents)
+      expect(reed.tph).toBe(testReed.tph)
+      expect(reed.tpd).toBe(testReed.tpd)
+   })
+
+   it('Width from tpd', () => {
+      const { warp, reed } = calculateWarpWidth('tpd', 2, testWarp, testReed)
+      //warp comparisons
+      expect(warp.epc).toBe(10)
+      expect(warp.width).toBe(50)
+      expect(warp.ends).toBe(testWarp.ends)
+      //reed comparisons
+      expect(reed.section).toBe(testReed.section)
+      expect(reed.dents).toBe(testReed.dents)
+      expect(reed.tph).toBe(testReed.tph)
+      expect(reed.tpd).toBe(2)
+   })
+
+
 
 })
 
