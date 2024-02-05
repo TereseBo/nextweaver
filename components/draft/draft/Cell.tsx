@@ -1,7 +1,7 @@
 //Component contains single cell for use in a grid,
 //id consitutes the coordinates and color the value of the grid position
 
-import './Cell.scss';
+import './cell.scss';
 
 import { ReactElement } from 'react';
 
