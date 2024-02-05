@@ -11,29 +11,28 @@ import { PreviousColor } from './Previouscolor'
 
 export function ColorPicker({ }) {
     const { weftColors, warpColors, currentColor, setCurrentColor, colorChange } = useContext(WeaveContext) as WeaveContextType
-   
+
     //Sets the active color
     function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>) {
-        console.log(e.target)
         let target = e.target as HTMLInputElement
         const value = target.value
         setCurrentColor(value)
     }
 
     //Replaces all instances of a color in the warp with a new value
-    function updateWarpColor(e: React.ChangeEvent<HTMLInputElement> ) {
+    function updateWarpColor(e: React.ChangeEvent<HTMLInputElement>) {
         let target = e.target as HTMLInputElement
         const value = target.value
         console.log(target.id)
-        const colorInputId=target.id
-        colorChange(colorInputId, value )
+        const colorInputId = target.id
+        colorChange(colorInputId, value)
     }
     //Replaces all instances of a color in the weft with a new value
-    function updateWeftColor(e: React.ChangeEvent<HTMLInputElement> ) {
+    function updateWeftColor(e: React.ChangeEvent<HTMLInputElement>) {
         let target = e.target as HTMLInputElement
         const value = target.value
-        const colorInputId=target.id
-        colorChange( colorInputId, value )
+        const colorInputId = target.id
+        colorChange(colorInputId, value)
     }
 
     return (
@@ -54,8 +53,8 @@ export function ColorPicker({ }) {
                         <div className="color-box" >
                             <h3>Previous <br />colors</h3>
                             <div id="previous-colors">
-                                <PreviousColor header='Warp' clickhandler={updateCurrentColor} changehandler={updateWarpColor} content={warpColors}/>
-                                <PreviousColor header='Weft' clickhandler={updateCurrentColor} changehandler={updateWeftColor} content={weftColors}/>
+                                <PreviousColor header='Warp' clickhandler={updateCurrentColor} changehandler={updateWarpColor} content={warpColors} />
+                                <PreviousColor header='Weft' clickhandler={updateCurrentColor} changehandler={updateWeftColor} content={weftColors} />
                             </div>
                         </div>
                     </div>

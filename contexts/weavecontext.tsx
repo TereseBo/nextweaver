@@ -35,7 +35,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
       let colors = row.filter((color) => color != '' && !uniqueColors.includes(color))
       uniqueColors = uniqueColors.concat(colors)
     })
-    setWarpColors(uniqueColors)
+    setWarpColors(Array.from(new Set(uniqueColors)))
   }, [warpGrid])
 
   //Keeps the state for weftcolors on updated
@@ -45,7 +45,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
       let colors = row.filter((color) => color != '' && !uniqueColors.includes(color))
       uniqueColors = uniqueColors.concat(colors)
     })
-    setWeftColors(uniqueColors)
+    setWeftColors(Array.from(new Set(uniqueColors)))
   }, [treadleGrid])
 
   function resizeGrid(gridName: gridName, height: number = draftHeight, width: number = draftWidth) {
@@ -109,6 +109,9 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
   function updateCell(cellId: string) {
     //x and y specifies the x and y coordinates in the grid
     const [gridName, x, y] = cellId.split('-') as [gridName, number, number]
+     if( gridName==undefined|| x==undefined || y==undefined){
+      return
+     }
 
     let gridCopy = copyGrid(gridName)
     let newColor = ''
