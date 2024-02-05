@@ -26,7 +26,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   const [warpColors, setWarpColors] = useState<colorCollection>([])
   const [weftColors, setWeftColors] = useState<colorCollection>([])
-
+  const [currentColor, setCurrentColor]=useState<color>('#000000')
 
 //Keeps the state for warpcolors on updated
   useEffect(() => {
@@ -142,7 +142,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   return (
 
-    <WeaveContext.Provider value={{ draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors }}>
+    <WeaveContext.Provider value={{ draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor,setCurrentColor }}>
       {children}
     </WeaveContext.Provider>
   )

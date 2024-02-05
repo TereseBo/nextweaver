@@ -3,14 +3,13 @@ import './colorpicker.scss'
 import { useContext } from 'react'
 
 import { Colorinput } from '@/components/zSharedComponents/Colorinput'
-import { ColorContext } from '@/contexts/colorcontext'
 import { WeaveContext } from '@/contexts/weavecontext'
 
 import { PreviousColor } from './Previouscolor'
 
 export function ColorPicker({ }) {
-    const { currentColor, setCurrentColor }: ColorContextType = useContext(ColorContext) as ColorContextType
-    const { weftColors, warpColors } = useContext(WeaveContext) as WeaveContextType
+    //const { currentColor, setCurrentColor }: ColorContextType = useContext(ColorContext) as ColorContextType
+    const { weftColors, warpColors, currentColor, setCurrentColor } = useContext(WeaveContext) as WeaveContextType
    
     function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>) {
         let target = e.target as HTMLInputElement

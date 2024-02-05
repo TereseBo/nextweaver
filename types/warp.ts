@@ -28,7 +28,9 @@ type WeaveContextType={
     shafts:number,
     warpColors:colorCollection,
     weftColors:colorCollection
-    updateCell:(cellId:string, newColor:color)=>void
+    updateCell:(cellId:string, newColor:color)=>void,
+    currentColor:color,
+    setCurrentColor:(newColor:color)=>void
 /*     resizeGrid:(gridName:string, width:number, height:number)=> void,
     updateGrid:(x:number, y:number, color:color)=> void, */
 /*     updateWarp:(width:number, height:number)=> void, 
