@@ -33,13 +33,13 @@ describe('Renders form', () => {
         let val: number | undefined = undefined
         let total = inputs.find(item => { return item.name === 'total' })
         let totalVal = total ? Number(total.value) : 0
-        console.log(total)
+      
         const values = inputs.map(item => {
             (['total', 'shrinkage', 'take_up', 'items'].includes(item.name)) ? val = 0 : val = Number(item.value)
             return val
         })
         const sum = values.reduce((a, b) => a + b, 0)
-        console.log(values)
+  
         expect(sum).toBe(Number(totalVal))
     })
 })

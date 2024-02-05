@@ -14,7 +14,6 @@ export function Draft() {
     function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>) {
         let target = e.target as HTMLInputElement
         const value = target.value
-        console.log(value)
     }
 
     return (

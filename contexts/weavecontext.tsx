@@ -85,7 +85,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
   function updateCell(cellId: string, newColor: color) {
     //x and y specifies the x and y coordinates in the grid
     const [gridName, x, y] = cellId.split('-') as [gridName, number, number]
-    console.log(`Grid: ${gridName}, x: ${x} and y: ${y}`)
+
     let gridCopy = copyGrid(gridName)
 
     if (gridName == 'tieup') {
