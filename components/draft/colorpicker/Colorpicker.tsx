@@ -4,17 +4,21 @@ import { useContext } from 'react'
 
 import { Colorinput } from '@/components/zSharedComponents/Colorinput'
 import { ColorContext } from '@/contexts/colorcontext'
+import { WeaveContext } from '@/contexts/weavecontext'
+
+import { PreviousColor } from './Previouscolor'
 
 export function ColorPicker({ }) {
     const { currentColor, setCurrentColor }: ColorContextType = useContext(ColorContext) as ColorContextType
-
+    const { weftColors, warpColors } = useContext(WeaveContext) as WeaveContextType
+   
     function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>) {
         let target = e.target as HTMLInputElement
         const value = target.value
 
         setCurrentColor(value)
     }
-
+//TODO:Add function to replace a color in warp/ weft on change of exisiting color
     return (
         <div className='form-container'>
             <form id='colorpick-form' >
@@ -33,17 +37,8 @@ export function ColorPicker({ }) {
                         <div className="color-box" >
                             <h3>Previous <br />colors</h3>
                             <div id="previous-colors">
-                                <div className="previous-color">
-                                    {/* TODO: Extract previous colorbox and have it mapp from color array to be added in context */}
-                                    <h5>Warp</h5>
-                                    <Colorinput id="warp" label="Warp" value={'#000000'} clickhandler={updateCurrentColor} changehandler={updateCurrentColor} />
-                                    <Colorinput id="weft" label="Weft" value={'#000000'} clickhandler={updateCurrentColor} changehandler={updateCurrentColor} />
-                                </div>
-                                <div className="previous-color">
-                                    <h5>Weft</h5>
-                                    <Colorinput id="warp" label="Warp" value={'#000000'} clickhandler={updateCurrentColor} changehandler={updateCurrentColor} />
-                                    <Colorinput id="weft" label="Weft" value={'#000000'} clickhandler={updateCurrentColor} changehandler={updateCurrentColor} />
-                                </div>
+                                <PreviousColor header='Warp' clickhandler={updateCurrentColor} changehandler={updateCurrentColor} content={warpColors}/>
+                                <PreviousColor header='Weft' clickhandler={updateCurrentColor} changehandler={updateCurrentColor} content={weftColors}/>
                             </div>
 
                         </div>

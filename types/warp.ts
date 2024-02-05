@@ -26,6 +26,8 @@ type WeaveContextType={
     draftHeight:number,
     draftWidth: number,
     shafts:number,
+    warpColors:colorCollection,
+    weftColors:colorCollection
     updateCell:(cellId:string, newColor:color)=>void
 /*     resizeGrid:(gridName:string, width:number, height:number)=> void,
     updateGrid:(x:number, y:number, color:color)=> void, */

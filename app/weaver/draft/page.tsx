@@ -1,6 +1,6 @@
 'use client'
+import { ColorPicker } from '@/components/draft/colorpicker/Colorpicker'
 import { Draft } from '@/components/draft/draft/Draft'
-import { ColorPicker } from '@/components/draft/forms/Colorpicker'
 import { Header } from '@/components/zSharedComponents/Header'
 import { ColorProvider } from '@/contexts/colorcontext'
 import { WeaveProvider } from '@/contexts/weavecontext'
