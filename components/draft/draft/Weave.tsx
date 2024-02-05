@@ -11,6 +11,7 @@ export function Weave() {
   const [weaveGrid, setWeaveGrid] = useState<grid>(new Array(draftHeight).fill(new Array(draftWidth).fill('', 0)))
 
   useEffect(() => {
+
     //Returns the color if present for the beat
     function getWeftColor(y: number) {
       let color = treadleGrid[y].find(isColored)
@@ -75,6 +76,7 @@ export function Weave() {
     })
     setWeaveGrid(gridCopy)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [warpGrid, treadleGrid, tieUpGrid])
 
   return (
