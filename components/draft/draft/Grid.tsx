@@ -3,7 +3,7 @@
 //The prop type is used to keep track of the parentgrid of downstream components
 import './grid.scss';
 
-import { ReactElement,useContext } from 'react'
+import { ReactElement, useContext } from 'react'
 
 import { Row } from '@/components/draft/draft/Row'
 import { ColorContext } from '@/contexts/colorcontext'
@@ -18,9 +18,9 @@ interface CellTarget extends EventTarget {
 interface Grid extends HTMLDivElement {
     type: string,
     props: object,
-    key:any
+    key: any
 }
-export function Grid(props: { content: grid, type: string, }):ReactElement<Grid> {
+export function Grid(props: { content: grid, type: string, }): ReactElement<Grid> {
     const { updateCell } = useContext(WeaveContext) as WeaveContextType
     const { currentColor } = useContext(ColorContext) as ColorContextType
     //On click, update backgroundcolor
@@ -28,11 +28,11 @@ export function Grid(props: { content: grid, type: string, }):ReactElement<Grid>
         console.log('clickhandler in grid')
         console.log(currentColor)
         const cell = e.target as CellTarget
-        updateCell(cell.id, currentColor)
+        updateCell(cell.id)
     }
 
     const { type, content } = props
-     
+
     const gridRows = content.map((item, index) => {
         //TODO: Handle empty item.
         return <Row content={item} key={`${type}-row-${index}`} rownr={index} type={type} />

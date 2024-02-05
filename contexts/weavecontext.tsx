@@ -1,6 +1,6 @@
 //Context handling information and calculations between different parts (aka treadles, shafts, tieups) of the draft and calculates the weave.
 //dependencies
-import { createContext, useEffect,useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 
 //exports
@@ -26,14 +26,14 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   const [warpColors, setWarpColors] = useState<colorCollection>([])
   const [weftColors, setWeftColors] = useState<colorCollection>([])
-  const [currentColor, setCurrentColor]=useState<color>('#000000')
+  const [currentColor, setCurrentColor] = useState<color>('#000000')
 
-//Keeps the state for warpcolors on updated
+  //Keeps the state for warpcolors on updated
   useEffect(() => {
     let uniqueColors: color[] = []
     warpGrid.forEach(row => {
       let colors = row.filter((color) => color != '' && !uniqueColors.includes(color))
-      uniqueColors=uniqueColors.concat(colors)
+      uniqueColors = uniqueColors.concat(colors)
     })
     setWarpColors(uniqueColors)
   }, [warpGrid])
@@ -43,7 +43,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     let uniqueColors: color[] = []
     treadleGrid.forEach(row => {
       let colors = row.filter((color) => color != '' && !uniqueColors.includes(color))
-      uniqueColors=uniqueColors.concat(colors)
+      uniqueColors = uniqueColors.concat(colors)
     })
     setWeftColors(uniqueColors)
   }, [treadleGrid])
@@ -105,15 +105,17 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
   }
 
   //Changes content of grid-array depending on cell-id
-  function updateCell(cellId: string, newColor: color) {
+  function updateCell(cellId: string) {
     //x and y specifies the x and y coordinates in the grid
     const [gridName, x, y] = cellId.split('-') as [gridName, number, number]
-
+    console.log(gridName)
     let gridCopy = copyGrid(gridName)
-
+    let newColor = ''
     if (gridName == 'tieup') {
       console.log('gridname was == tieup')
       newColor = '#000000'
+    } else {
+      newColor = currentColor
     }
     //If warp, clear other cells in column.
     if (gridName == 'warp') {
@@ -133,7 +135,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     }
 
     gridCopy[y][x] = gridCopy[y][x] == '' ? newColor : ''
-      //State is updated
+    //State is updated
     updateState(gridName, gridCopy)
 
   }
@@ -142,7 +144,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   return (
 
-    <WeaveContext.Provider value={{ draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor,setCurrentColor }}>
+    <WeaveContext.Provider value={{ draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor }}>
       {children}
     </WeaveContext.Provider>
   )
