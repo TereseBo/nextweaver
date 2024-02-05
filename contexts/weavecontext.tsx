@@ -40,7 +40,6 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   //Keeps the state for weftcolors on updated
   useEffect(() => {
-    console.log('I ran')
     let uniqueColors: color[] = []
     treadleGrid.forEach(row => {
       let colors = row.filter((color) => color != '' && !uniqueColors.includes(color))
