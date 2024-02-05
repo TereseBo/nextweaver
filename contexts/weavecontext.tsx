@@ -112,6 +112,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     let gridCopy = copyGrid(gridName)
 
     if (gridName == 'tieup') {
+      console.log('gridname was == tieup')
       newColor = '#000000'
     }
     //If warp, clear other cells in column.
@@ -132,7 +133,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     }
 
     gridCopy[y][x] = gridCopy[y][x] == '' ? newColor : ''
-
+      //State is updated
     updateState(gridName, gridCopy)
 
   }
