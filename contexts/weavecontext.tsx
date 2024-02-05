@@ -30,7 +30,6 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
 //Keeps the state for warpcolors on updated
   useEffect(() => {
-    console.log('I ran')
     let uniqueColors: color[] = []
     warpGrid.forEach(row => {
       let colors = row.filter((color) => color != '' && !uniqueColors.includes(color))
