@@ -1,3 +1,5 @@
+//The colorpick form displays wich color is currently picked for clicking in the draft but also displays wich colors are present in warp/weft.
+//Previous colors can be picked again by click and replaced in the draft by changeing
 import './colorpicker.scss'
 
 import { useContext } from 'react'
@@ -8,18 +10,32 @@ import { WeaveContext } from '@/contexts/weavecontext'
 import { PreviousColor } from './Previouscolor'
 
 export function ColorPicker({ }) {
-    //const { currentColor, setCurrentColor }: ColorContextType = useContext(ColorContext) as ColorContextType
-    const { weftColors, warpColors, currentColor, setCurrentColor } = useContext(WeaveContext) as WeaveContextType
+    const { weftColors, warpColors, currentColor, setCurrentColor, colorChange } = useContext(WeaveContext) as WeaveContextType
    
+    //Sets the active color
     function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>) {
+        console.log(e.target)
         let target = e.target as HTMLInputElement
         const value = target.value
-        console.log(target)
-        console.log(value)
-
         setCurrentColor(value)
     }
-//TODO:Add function to replace a color in warp/ weft on change of exisiting color
+
+    //Replaces all instances of a color in the warp with a new value
+    function updateWarpColor(e: React.ChangeEvent<HTMLInputElement> ) {
+        let target = e.target as HTMLInputElement
+        const value = target.value
+        console.log(target.id)
+        const colorInputId=target.id
+        colorChange(colorInputId, value )
+    }
+    //Replaces all instances of a color in the weft with a new value
+    function updateWeftColor(e: React.ChangeEvent<HTMLInputElement> ) {
+        let target = e.target as HTMLInputElement
+        const value = target.value
+        const colorInputId=target.id
+        colorChange( colorInputId, value )
+    }
+
     return (
         <div className='form-container'>
             <form id='colorpick-form' >
@@ -38,10 +54,9 @@ export function ColorPicker({ }) {
                         <div className="color-box" >
                             <h3>Previous <br />colors</h3>
                             <div id="previous-colors">
-                                <PreviousColor header='Warp' clickhandler={updateCurrentColor} changehandler={updateCurrentColor} content={warpColors}/>
-                                <PreviousColor header='Weft' clickhandler={updateCurrentColor} changehandler={updateCurrentColor} content={weftColors}/>
+                                <PreviousColor header='Warp' clickhandler={updateCurrentColor} changehandler={updateWarpColor} content={warpColors}/>
+                                <PreviousColor header='Weft' clickhandler={updateCurrentColor} changehandler={updateWeftColor} content={weftColors}/>
                             </div>
-
                         </div>
                     </div>
                 </div>

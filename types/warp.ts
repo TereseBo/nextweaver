@@ -15,22 +15,24 @@ type WarpLengthData={
     total: number
 }
 
-type colorCollection=color[]
+
 type grid=color[][]
-type gridName='weave' | 'tieup'|'warp'|'treadle'
+type gridName='weave' | 'tieup'|'warp'|'treadle'|'weft'
+
 type WeaveContextType={
-    //weaveGrid:grid,
     treadleGrid:grid,
     warpGrid:grid,
     tieUpGrid: grid,
     draftHeight:number,
     draftWidth: number,
     shafts:number,
+    //Related to color
     warpColors:colorCollection,
     weftColors:colorCollection
     updateCell:(cellId:string)=>void,
     currentColor:color,
-    setCurrentColor:(newColor:color)=>void
+    setCurrentColor:(newColor:color)=>void,
+    colorChange:(previousColorId:string, previousColor:color)=>void
 /*     resizeGrid:(gridName:string, width:number, height:number)=> void,
     updateGrid:(x:number, y:number, color:color)=> void, */
 /*     updateWarp:(width:number, height:number)=> void, 
