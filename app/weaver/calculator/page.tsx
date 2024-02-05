@@ -7,7 +7,6 @@ export default function CalculatorPage() {
     return (
         <div id='calculator-page'>
             <Header title="Welcome to the calculator!" text="Start to fill in the form and it will update as you write." />
-            Calculatorpage, good job
             <div className="calc-container">
             <Warplengthform/>
             <Warpwidthform/>

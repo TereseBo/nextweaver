@@ -46,11 +46,11 @@ export function Weave() {
     function isTiedUp(shaft: number, treadle: number) {
       return tieUpGrid[shaft][treadle] != ''
     }
-    
+
     //Copies weavestate and updates colors according to warp, treadling and tie-up, then updates the state
     let gridCopy = JSON.parse(JSON.stringify(weaveGrid))
 
-    gridCopy.forEach((row: color[], y:number) => {
+    gridCopy.forEach((row: color[], y: number) => {
       let weftColor = getWeftColor(y)
 
       row.forEach((cell: color, x: number) => {
@@ -76,7 +76,7 @@ export function Weave() {
     })
     setWeaveGrid(gridCopy)
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [warpGrid, treadleGrid, tieUpGrid])
 
   return (

@@ -7,7 +7,6 @@ export default function WeaverPage() {
             <div>
                 <Header title="Welcome to the weaving project creator!" text="Start by registering your loom information. If you already have go straight to draft."></Header>
                 <Preferences/>
-                Weaverpage, good job
             </div>
         </>
     )
