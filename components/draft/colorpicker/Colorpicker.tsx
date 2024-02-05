@@ -50,11 +50,14 @@ export function ColorPicker({ }) {
                             <h3>Current <br />color</h3>
                             <Colorinput id="current-color" label="" value={currentColor} changehandler={updateCurrentColor} clickhandler={undefined} />
                         </div>
+                        
                         <div className="color-box" >
-                            <h3>Previous <br />colors</h3>
+                            <h3>Colors in <br />draft</h3>
                             <div id="previous-colors">
-                                <PreviousColor header='Warp' clickhandler={updateCurrentColor} changehandler={updateWarpColor} content={warpColors} />
-                                <PreviousColor header='Weft' clickhandler={updateCurrentColor} changehandler={updateWeftColor} content={weftColors} />
+                                {(warpColors.length > 0) &&(
+                                <PreviousColor header='Warp' clickhandler={updateCurrentColor} changehandler={updateWarpColor} content={warpColors} />)}
+                                {(weftColors.length > 0) &&(
+                                <PreviousColor header='Weft' clickhandler={updateCurrentColor} changehandler={updateWeftColor} content={weftColors} />)}
                             </div>
                         </div>
                     </div>
