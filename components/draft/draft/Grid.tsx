@@ -25,6 +25,8 @@ export function Grid(props: { content: grid, type: string, }):ReactElement<Grid>
     const { currentColor } = useContext(ColorContext) as ColorContextType
     //On click, update backgroundcolor
     function clickhandler(e: React.MouseEvent<CellProps>) {
+        console.log('clickhandler in grid')
+        console.log(currentColor)
         const cell = e.target as CellTarget
         updateCell(cell.id, currentColor)
     }
