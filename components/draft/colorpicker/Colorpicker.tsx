@@ -13,14 +13,14 @@ export function ColorPicker({ }) {
     const { weftColors, warpColors, currentColor, setCurrentColor, colorChange } = useContext(WeaveContext) as WeaveContextType
 
     //Sets the active color
-    function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>) {
+    function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>):void {
         let target = e.target as HTMLInputElement
         const value = target.value
         setCurrentColor(value)
     }
 
     //Replaces all instances of a color in the warp with a new value
-    function updateWarpColor(e: React.ChangeEvent<HTMLInputElement>) {
+    function updateWarpColor(e: React.ChangeEvent<HTMLInputElement>):void {
         let target = e.target as HTMLInputElement
         const value = target.value
         console.log(target.id)
@@ -28,7 +28,7 @@ export function ColorPicker({ }) {
         colorChange(colorInputId, value)
     }
     //Replaces all instances of a color in the weft with a new value
-    function updateWeftColor(e: React.ChangeEvent<HTMLInputElement>) {
+    function updateWeftColor(e: React.ChangeEvent<HTMLInputElement>):void {
         let target = e.target as HTMLInputElement
         const value = target.value
         const colorInputId = target.id

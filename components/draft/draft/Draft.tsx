@@ -1,30 +1,30 @@
 import './draft.scss'
 
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { Grid } from '@/components/draft/draft/Grid'
+import {Errormsg} from '@/components/zSharedComponents/Errormsg'
 import { WeaveContext } from '@/contexts/weavecontext'
 
 import { Weave } from './Weave'
-
 export function Draft() {
 
-    const {treadleGrid, warpGrid, tieUpGrid } = useContext(WeaveContext) as WeaveContextType
+    const { treadleGrid, warpGrid, tieUpGrid, initiateGrids } = useContext(WeaveContext) as WeaveContextType
 
-    function updateCurrentColor(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>) {
-        let target = e.target as HTMLInputElement
-        const value = target.value
-    }
+    useEffect(() => {
+        initiateGrids()
+    })
 
     return (
-        <div className="draft">
-            <div className="partial">
-                <Weave /> <Grid content={treadleGrid} type='treadle' />
-            </div>
-            <div className="partial">
-                <Grid content={warpGrid} type='warp' /> <Grid content={tieUpGrid} type='tieup' />
-            </div>
-        </div>
+        (treadleGrid && tieUpGrid && warpGrid) ? (
+            <div className="draft">
+                <div className="partial">
+                    <Weave /> <Grid content={treadleGrid} type='treadle' />
+                </div>
+                <div className="partial">
+                    <Grid content={warpGrid} type='warp' /> <Grid content={tieUpGrid} type='tieup' />
+                </div>
+            </div>) : (<Errormsg text='Ooops something went wrong when creating the draft, please try again'/>)
     )
 }
 

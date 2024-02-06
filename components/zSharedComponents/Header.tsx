@@ -1,5 +1,7 @@
 import './header.scss'
 
+import Link from 'next/link'
+
 export function Header(params:{title:string, text:string}){
     const {title, text}= params
     return(
@@ -7,9 +9,9 @@ export function Header(params:{title:string, text:string}){
             <h1>{title}</h1>
             <p>{text}</p>
             <nav className="nav-bar">
-                <a href="/weaver/draft">Draft</a>
-                <a href="/weaver/calculator">Calculator</a>
-                <a href="/weaver">Settings</a>
+                <Link href="/weaver/calculator">Calculator</Link>
+                <Link href="/weaver">Settings</Link>
+                <Link href="/weaver/draft">Draft</Link>
 
             </nav>
         </header>

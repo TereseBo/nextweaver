@@ -20,19 +20,24 @@ type grid=color[][]
 type gridName='weave' | 'tieup'|'warp'|'treadle'|'weft'
 
 type WeaveContextType={
-    treadleGrid:grid,
-    warpGrid:grid,
-    tieUpGrid: grid,
+    treadleGrid:grid|undefined,
+    warpGrid:grid|undefined,
+    tieUpGrid: grid|undefined,
     draftHeight:number,
     draftWidth: number,
     shafts:number,
+    setShafts:( newValue:number)=>void,
+    treadles:number,
+    setTreadles:(newValue:number)=>void,
+   // reSizeGrid:(gridName: gridName, height: number, width: number)=>void
     //Related to color
     warpColors:colorCollection,
     weftColors:colorCollection
     updateCell:(cellId:string)=>void,
     currentColor:color,
     setCurrentColor:(newColor:color)=>void,
-    colorChange:(previousColorId:string, previousColor:color)=>void
+    colorChange:(previousColorId:string, previousColor:color)=>void,
+    initiateGrids:()=>void,
 /*     resizeGrid:(gridName:string, width:number, height:number)=> void,
     updateGrid:(x:number, y:number, color:color)=> void, */
 /*     updateWarp:(width:number, height:number)=> void, 

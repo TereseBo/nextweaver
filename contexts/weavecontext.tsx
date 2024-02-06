@@ -1,7 +1,7 @@
 //Context handling information and calculations between different parts (aka treadles, shafts, tieups) of the draft and calculates the weave.
 //dependencies
-import { createContext, useEffect, useState } from 'react'
 
+import { createContext, useEffect, useState } from 'react'
 
 //exports
 export const WeaveContext = createContext<WeaveContextType | null>(null)
@@ -14,22 +14,38 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
   const [treadles, setTreadles] = useState<number>(6)
 
   //Inital grids are empty, representing no color filled in 
-  const [warpGrid, setWarpGrid] = useState<grid>(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
-  const [treadleGrid, setTreadleGrid] = useState<grid>(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
-  const [tieUpGrid, setTieUpGrid] = useState<grid>(new Array(shafts).fill(new Array(treadles).fill('', 0)))
+  const [warpGrid, setWarpGrid] = useState<grid>()
+  const [treadleGrid, setTreadleGrid] = useState<grid>()
+  const [tieUpGrid, setTieUpGrid] = useState<grid>()
 
   //For tracking color sequence in the warp
   const [warpingSequence, setWarpingSequence] = useState<colorCollection>([])
   //For tracking which shaft to tread
   const [sleySequence, setSleySequence] = useState<number[]>([])
 
-  
+
   const [warpColors, setWarpColors] = useState<colorCollection>([])
   const [weftColors, setWeftColors] = useState<colorCollection>([])
   const [currentColor, setCurrentColor] = useState<color>('#000000')
 
+  //Keeps grids updated on preferences change 
+  useEffect(() => {
+    setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
+    setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
+    setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
+  }, [shafts, draftHeight, draftWidth, treadles])
+function initiateGrids(){
+  if(!warpGrid) setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
+  if(!treadleGrid)  setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
+  if(!tieUpGrid) setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
+}
+
   //Keeps the state for warpcolors on updated
   useEffect(() => {
+    if (!warpGrid) {
+      setWarpColors([])
+      return
+    }
     let uniqueColors: color[] = []
     warpGrid.forEach(row => {
       let colors = row.filter((color) => color != '' && !uniqueColors.includes(color))
@@ -40,6 +56,10 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   //Keeps the state for weftcolors on updated
   useEffect(() => {
+    if (!treadleGrid) {
+      setWeftColors([])
+      return
+    }
     let uniqueColors: color[] = []
     treadleGrid.forEach(row => {
       let colors = row.filter((color) => color != '' && !uniqueColors.includes(color))
@@ -67,7 +87,6 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
     setDraftheight(height)
     setDraftwidth(width)
     updateState(gridName, gridCopy)
-
   }
 
   //Returns a deepcopy of a grid by name
@@ -109,9 +128,9 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
   function updateCell(cellId: string) {
     //x and y specifies the x and y coordinates in the grid
     const [gridName, x, y] = cellId.split('-') as [gridName, number, number]
-     if( gridName==undefined|| x==undefined || y==undefined){
+    if (gridName == undefined || x == undefined || y == undefined) {
       return
-     }
+    }
 
     let gridCopy = copyGrid(gridName)
     let newColor = ''
@@ -158,7 +177,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   return (
 
-    <WeaveContext.Provider value={{ draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor, colorChange }}>
+    <WeaveContext.Provider value={{ treadles, setTreadles,initiateGrids, setShafts, draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor, colorChange }}>
       {children}
     </WeaveContext.Provider>
   )

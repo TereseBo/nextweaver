@@ -1,15 +1,14 @@
-import { Header } from '@/components/zSharedComponents/Header'
-
+'use client'
+import { WeaveProviderWrapper } from '@/contexts/WeaveProviderWrapper'
 
 export default function WeaverBaseLayout({
     children,
 }: {
-    children: React.ReactNode
+    children:  React.ReactElement 
 }) {
     return (
         <>
-
-            <main>{children}</main>
+            <main>  <WeaveProviderWrapper>{children}</WeaveProviderWrapper></main>
             <footer></footer>
         </>
 
