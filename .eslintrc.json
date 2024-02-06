@@ -4,6 +4,7 @@
     "react",
     "simple-import-sort"
   ],
+  "ignorePatterns": ["/*.yml"],
   "rules": {
     // increase the severity of sortingrules so they are auto-fixable
     "simple-import-sort/imports": "error",
