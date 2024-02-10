@@ -11,7 +11,7 @@ export function Yarnlist(params: { content: colorCollection, heading: string }) 
         <div id="warp-list" className="yarn-list">
             <form className=''>
             <h3 className="form-header">{heading}</h3>
-            {colorList}
+            {(colorList.length>0)?(colorList):(<div>No {`${heading.toLowerCase()}`} in the draft</div>)}
             </form>
         </div>
 
