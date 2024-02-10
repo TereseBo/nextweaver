@@ -51,9 +51,9 @@ export function ProjectOptions() {
 
             </SecondaryMenu>
             <div className='optional-content'>
-                {displayWarp ? <Warpwidthform /> : null}
                 {displayYarn ? <Yarnlist content={warpColors} heading={'Warp'}/> : null}
                 {displayYarn ? <Yarnlist content={weftColors} heading={'Weft'}/> : null}
+                {displayWarp ? <Warpwidthform /> : null}
             </div>
             <div ref={bottomRef}/>
         </div>

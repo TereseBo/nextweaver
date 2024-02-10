@@ -1,3 +1,4 @@
+//Component for rendering a colorlist which the user can annotate
 import './Yarnlist.scss'
 
 import { Cell } from '../draft/Cell'
@@ -14,7 +15,5 @@ export function Yarnlist(params: { content: colorCollection, heading: string }) 
             {(colorList.length>0)?(colorList):(<div>No {`${heading.toLowerCase()}`} in the draft</div>)}
             </form>
         </div>
-
     )
-
 }
