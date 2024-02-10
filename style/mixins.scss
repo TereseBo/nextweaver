@@ -17,6 +17,7 @@
 @mixin buttonOrlink {
     border: none;
     cursor: pointer;
+    border-radius: 2px;
     background-color: v.$accent-color1;
     color: v.$secondary-color;
     @include baseText;
