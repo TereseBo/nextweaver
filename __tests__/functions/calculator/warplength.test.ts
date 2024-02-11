@@ -1,4 +1,4 @@
-import { calculateNewWarpLength } from '@/functions/calculator/warplength'
+import { calculateNewWarpLength } from '@/components/calculator/functions/warplength'
 
 describe('Basic calculations on warp width return expected result', () => {
     const testItems = [
@@ -30,7 +30,7 @@ describe('Basic calculations on warp width return expected result', () => {
             secondhem: 24,
         }
         const warp = calculateNewWarpLength('total', 700, testWarp)
-        
+
         //Values expected to change
         expect(warp.total).toBe(700)
         expect(warp.items.length).toBe(testWarp.items.length)
@@ -50,7 +50,7 @@ describe('Basic calculations on warp width return expected result', () => {
             secondhem: 10,
         }
         const warp = calculateNewWarpLength('items', 4, testWarp)
-        
+
         //Values expected to change
         expect(warp.total).toBe(439)
         expect(warp.items.length).toBe(4)
@@ -70,7 +70,7 @@ describe('Basic calculations on warp width return expected result', () => {
             secondhem: testItems[1].secondhem,
         }
         const warp = calculateNewWarpLength('piece:1:length', 50, testWarp)
-        
+
         //Values expected to change
         expect(warp.total).toBe(330)
         expect(warp.items.length).toBe(2)

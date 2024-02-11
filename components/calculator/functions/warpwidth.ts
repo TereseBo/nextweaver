@@ -1,7 +1,7 @@
 //Functions for handeling individual calculations of weave width and function for associated form 
-import { isZeroish } from '../utils/isZeroish'
-import { roundToTwoDec } from '../utils/roundToTwo'
+import { isZeroish } from './isZeroish'
 import { calculateEpcFromReed } from './reed'
+import { roundToTwoDec } from './roundToTwo'
 
 export function calculateWarpWidth(target: string, value: number, warpin: WarpWidthData, reedin: Reed) {
 
@@ -39,7 +39,7 @@ export function calculateWarpWidth(target: string, value: number, warpin: WarpWi
             warp.width = calculateWeaveWidth(warp.ends, warp.epc)
             break;
         case ('tph'):
-            reed.tph=value
+            reed.tph = value
             break;
         default:
             break;

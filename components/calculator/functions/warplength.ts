@@ -1,6 +1,6 @@
 //Calculations relating to length
 
-import { roundToTwoDec } from '../utils/roundToTwo'
+import { roundToTwoDec } from './roundToTwo'
 
 export function calculateNewWarpLength(target: string, value: any, warpData: WarpLengthData) {
 
@@ -44,7 +44,7 @@ export function calculateWarpLength(warpLengthData: WarpLengthData): number {
     items.length > 0 ? itemsLength = calculateItemWarpLength(items, take_up, shrinkage) : itemsLength = 0
 
     const total = warpLength(fixedLength, itemsLength)
-   
+
     return Math.ceil(total)
 }
 
@@ -80,7 +80,7 @@ export function calculateFinishedItemLength(warpLengthData: WarpLengthData): Ite
         const afterWeaveIn = combinedLength * (1 - take_up / 100)
         const afterWashShrinkage = afterWeaveIn * (1 - shrinkage / 100)
         const perItemTotal = afterWashShrinkage / nrOfItems
-    
+
         itemLength = Math.ceil(perItemTotal * 0.8)
         itemHem = Math.floor(perItemTotal * 0.1)
     }

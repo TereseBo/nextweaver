@@ -1,13 +1,13 @@
 //Calculations starting from reed and for matching density of reed to epc
-import { isZeroish } from '../utils/isZeroish';
+import { isZeroish } from './isZeroish';
 
 
 
-export function reedMatch( warp:WarpWidthData,reed:Reed,){
-    let match= true
-    let density= reed.dents/reed.section
-    if (warp.epc%density){
-        match=false
+export function reedMatch(warp: WarpWidthData, reed: Reed,) {
+    let match = true
+    let density = reed.dents / reed.section
+    if (warp.epc % density) {
+        match = false
     }
     return match
 }
