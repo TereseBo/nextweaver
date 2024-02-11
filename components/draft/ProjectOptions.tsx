@@ -7,10 +7,10 @@ import { useContext, useEffect, useRef } from 'react'
 import { WeaveContext } from '@/contexts/weavecontext'
 import { toggleBool } from '@/functions/toggleBool'
 
+import { Downloadweave } from './filehandler/Downloadweave'
 import { Yarnlist } from './forms/Yarnlist'
 import { Warpwidthform } from '../calculator/Warpwidthform'
 import { SecondaryMenu } from '../zSharedComponents/SecondaryMeny'
-
 
 export function ProjectOptions() {
     //State controls if yarnlist and warpeidth form are to be seen in the draftpage
@@ -48,6 +48,7 @@ export function ProjectOptions() {
                 {displayYarn ? <button onClick={yarnClickhandler}>Hide yarn list</button> : <button onClick={yarnClickhandler}>Add yarn list</button>}
                 {displayWarp ? <button onClick={warpClickhandler}>Hide warp info</button> : <button onClick={warpClickhandler}>Add warp info</button>}
                 {/* TODO: Add save button options after implementing logIn <button>Save draft</button> */}
+                <Downloadweave/>
 
             </SecondaryMenu>
             <div className='optional-content'>
