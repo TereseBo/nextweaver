@@ -9,7 +9,7 @@ type ShaftDescription = {
 
 type TreadlingDescription = {
     count: null | number,
-    pattern: [number[]],
+    pattern: number[],
     pattern_repeat: null | number,
     colors: ColorDescription[]
 }
@@ -19,7 +19,7 @@ type WeaveObject = {
     ,
     treadling: TreadlingDescription
     tieup: {
-        pattern: []
+        pattern: [number[]]
     },
     threads: null | number
 }
