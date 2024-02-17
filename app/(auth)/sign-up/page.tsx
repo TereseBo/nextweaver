@@ -1,11 +1,11 @@
-//Page for sign-up, only containing content required for sign-up andprovided by clerk
+//Page for sign-up, only containing content required for sign-up provided by clerk
 
 import { SignUp } from '@clerk/nextjs';
 
 export default function Page() {
-  return (
-    <div className='signup_container'>
-      <SignUp />
-    </div>
-  );
+    return (
+            <div className='signup_container'>
+                <SignUp />
+            </div>
+    );
 }
