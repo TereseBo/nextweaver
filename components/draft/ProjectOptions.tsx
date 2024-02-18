@@ -1,4 +1,5 @@
 //Contains logic for optional additions to draftpage,mainly intended for use when planning a weaving project and printing the draft
+'use-client'
 import './ProjectOptions.scss'
 
 import { useState } from 'react'

@@ -2,7 +2,7 @@
 import './clerk.scss'
 
 import { Header } from '@/components/zSharedComponents/Header'
-export default function WeaverBaseLayout({
+export default function AuthBaseLayout({
     children,
 }: {
     children: React.ReactElement
