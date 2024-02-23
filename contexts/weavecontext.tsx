@@ -1,17 +1,18 @@
 //Context handling information and calculations between different parts (aka treadles, shafts, tieups) of the draft and calculates the weave.
 //dependencies
-
 import { createContext, useEffect, useState } from 'react'
+
+import {defaultColor,defaultDraftHeight, defaultDraftWidth, defaultShafts, defaultTreadles } from '@/constants/weaveDefaults'
 
 //exports
 export const WeaveContext = createContext<WeaveContextType | null>(null)
 
 export function WeaveProvider({ children }: { children: React.ReactElement | React.ReactElement[] }) {
   //States used in grid creation
-  const [draftHeight, setDraftheight] = useState<number>(50)
-  const [draftWidth, setDraftwidth] = useState<number>(30)
-  const [shafts, setShafts] = useState<number>(8)
-  const [treadles, setTreadles] = useState<number>(6)
+  const [draftHeight, setDraftheight] = useState<number>(defaultDraftHeight)
+  const [draftWidth, setDraftwidth] = useState<number>(defaultDraftWidth)
+  const [shafts, setShafts] = useState<number>(defaultShafts)
+  const [treadles, setTreadles] = useState<number>(defaultTreadles)
 
   //Inital grids are empty, representing no color filled in 
   const [warpGrid, setWarpGrid] = useState<grid>()
@@ -26,7 +27,7 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   const [warpColors, setWarpColors] = useState<colorCollection>([])
   const [weftColors, setWeftColors] = useState<colorCollection>([])
-  const [currentColor, setCurrentColor] = useState<color>('#000000')
+  const [currentColor, setCurrentColor] = useState<color>(defaultColor)
 
   //Keeps grids updated on preferences change 
   useEffect(() => {
@@ -177,7 +178,7 @@ function initiateGrids(){
 
   return (
 
-    <WeaveContext.Provider value={{ treadles, setTreadles,initiateGrids, setShafts, draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor, colorChange }}>
+    <WeaveContext.Provider value={{ treadles, setTreadles,initiateGrids, setShafts, draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor, colorChange, setTieUpGrid, setTreadleGrid, setWarpGrid }}>
       {children}
     </WeaveContext.Provider>
   )
