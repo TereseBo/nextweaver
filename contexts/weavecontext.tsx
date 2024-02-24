@@ -1,7 +1,7 @@
 //Context handling information and calculations between different parts (aka treadles, shafts, tieups) of the draft and calculates the weave.
 //dependencies
 import { createContext, useEffect, useState } from 'react'
-
+import { resizeGrid } from '@/functions/resizeGrid'
 import {defaultColor,defaultDraftHeight, defaultDraftWidth, defaultShafts, defaultTreadles } from '@/constants/weaveDefaults'
 
 //exports
@@ -29,13 +29,14 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
   const [weftColors, setWeftColors] = useState<colorCollection>([])
   const [currentColor, setCurrentColor] = useState<color>(defaultColor)
 
-/*   //Keeps grids updated on preferences change 
+  //Keeps grids updated on preferences change 
   useEffect(() => {
+
     setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
     setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
-    setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
-  }, [shafts, draftHeight, draftWidth, treadles]) */
-  
+    setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0))) 
+  }, [shafts, draftHeight, draftWidth, treadles])
+
 function initiateGrids(){
   if(!warpGrid) setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
   if(!treadleGrid)  setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
@@ -70,7 +71,7 @@ function initiateGrids(){
     setWeftColors(Array.from(new Set(uniqueColors)))
   }, [treadleGrid])
 
-  function resizeGrid(gridName: gridName, height: number = draftHeight, width: number = draftWidth) {
+/*   function resizeGrid(gridName: gridName, height: number = draftHeight, width: number = draftWidth) {
     let emptySubArray: string[] = new Array(width).fill('', 0)
 
     let gridCopy = copyGrid(gridName as gridName)
@@ -89,7 +90,7 @@ function initiateGrids(){
     setDraftheight(height)
     setDraftwidth(width)
     updateGrid(gridName, gridCopy)
-  }
+  } */
 
   //Returns a deepcopy of a grid by name
   function copyGrid(gridName: gridName) {
