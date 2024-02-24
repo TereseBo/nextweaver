@@ -29,12 +29,13 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
   const [weftColors, setWeftColors] = useState<colorCollection>([])
   const [currentColor, setCurrentColor] = useState<color>(defaultColor)
 
-  //Keeps grids updated on preferences change 
+/*   //Keeps grids updated on preferences change 
   useEffect(() => {
     setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
     setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
     setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
-  }, [shafts, draftHeight, draftWidth, treadles])
+  }, [shafts, draftHeight, draftWidth, treadles]) */
+  
 function initiateGrids(){
   if(!warpGrid) setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
   if(!treadleGrid)  setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))

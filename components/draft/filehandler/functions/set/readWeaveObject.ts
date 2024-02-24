@@ -1,4 +1,4 @@
-import {defaultDraftHeight, defaultDraftWidth, defaultShafts, defaultTreadles } from '@/constants/weaveDefaults'
+import { defaultDraftHeight, defaultDraftWidth, defaultShafts, defaultTreadles } from '@/constants/weaveDefaults'
 import { resizeGrid } from '@/functions/resizeGrid'
 
 import { createGrid } from '../utils'
@@ -10,14 +10,14 @@ export function readWeaveObject(weaveObject: WeaveObject) {
     let shafts = weaveObject.shafts.count || defaultShafts
     let treadles = weaveObject.treadling.count || defaultTreadles
     let width = Math.max(weaveObject.shafts.pattern.length, defaultDraftWidth)
-    let height =Math.max( weaveObject.treadling.pattern.length, defaultDraftHeight)
+    let height = Math.max(weaveObject.treadling.pattern.length, defaultDraftHeight)
 
-    let tieupGrid: grid = createGrid(treadles , shafts)
-    tieupGrid= readTieup(tieupGrid, weaveObject.tieup)
+    let tieupGrid: grid = createGrid(treadles, shafts)
+    tieupGrid = readTieup(tieupGrid, weaveObject.tieup)
     let treadleGrid: grid = readWeft(weaveObject.treadling, height)
-    let warpGrid: grid =readWarp(weaveObject.treadling,width)
+    let warpGrid: grid = readWarp(weaveObject.shafts, width)
 
-  
-    return {warpGrid, tieupGrid, treadleGrid}
+
+    return { warpGrid, tieupGrid, treadleGrid }
 
 }
