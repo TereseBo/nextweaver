@@ -1,13 +1,14 @@
 //This component contains the logic for calculating the weave
 import './weave.scss';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react'
 
 import { Grid } from '@/components/draft/draft/Grid'
 import { WeaveContext } from '@/contexts/weavecontext'
+import { resizeGrid } from '@/functions/resizeGrid'
 
 export function Weave() {
-  const { draftHeight, draftWidth, treadleGrid, shafts, tieUpGrid, warpGrid, initiateGrids } = useContext(WeaveContext) as WeaveContextType
+  const { draftHeight, draftWidth, treadleGrid, shafts, tieUpGrid, warpGrid } = useContext(WeaveContext) as WeaveContextType
   const [weaveGrid, setWeaveGrid] = useState<grid>(new Array(draftHeight).fill(new Array(draftWidth).fill('', 0)))
 
   useEffect(() => {
@@ -57,6 +58,10 @@ export function Weave() {
 
     //Copies weavestate and updates colors according to warp, treadling and tie-up, then updates the state
     let gridCopy = JSON.parse(JSON.stringify(weaveGrid))
+
+    //Resize if needed
+    gridCopy= resizeGrid(gridCopy, draftHeight, draftWidth)
+
 
     gridCopy.forEach((row: color[], y: number) => {
       let weftColor = getWeftColor(y)

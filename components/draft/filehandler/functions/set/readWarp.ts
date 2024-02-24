@@ -1,14 +1,18 @@
-import { defaultDraftWidth, defaultShafts,defaultWarpColor } from '@/constants/weaveDefaults'
+import { defaultDraftWidth, defaultShafts, defaultWarpColor } from '@/constants/weaveDefaults'
 
 import { createGrid } from '../utils'
 
 
-export function readWarp(warp: ShaftDescription) {
-    let shafts= warp.count || defaultShafts
-    let warpGrid= createGrid(warp.pattern.length || defaultDraftWidth, shafts )
+export function readWarp(warp: ShaftDescription, width:number) {
+    let height = warp.count || defaultShafts
+    let warpGrid = createGrid(width, height)
+  
+    if (warp.pattern== null ||!(warp.pattern.length > 0)) {
+        return warpGrid
+    }
+    
+    let colors = warp.colors
 
-    let colors= warp.colors
-     
     warp.pattern.forEach((thread, index) => {
         let currentColor = defaultWarpColor
         if (colors) {

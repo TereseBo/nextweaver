@@ -87,7 +87,7 @@ function initiateGrids(){
     }
     setDraftheight(height)
     setDraftwidth(width)
-    updateState(gridName, gridCopy)
+    updateGrid(gridName, gridCopy)
   }
 
   //Returns a deepcopy of a grid by name
@@ -109,14 +109,18 @@ function initiateGrids(){
   }
 
   //Accepts the name and new value of a grid and updates this state accordingly
-  function updateState(gridName: gridName, newValue: grid) {
+  function updateGrid(gridName: gridName, newValue: grid) {
     //Updates the named grid with the supplied value
     switch (gridName) {
       case 'warp':
+        setDraftwidth(newValue[0].length)
+        setShafts(newValue.length)
         setWarpGrid(newValue)
         break
       case 'weft':
       case 'treadle':
+        setDraftheight(newValue.length)
+        setTreadles(newValue[0].length)
         setTreadleGrid(newValue)
         break
       case 'tieup':
@@ -159,7 +163,7 @@ function initiateGrids(){
 
     gridCopy[y][x] = gridCopy[y][x] == '' ? newColor : ''
     //State is updated
-    updateState(gridName, gridCopy)
+    updateGrid(gridName, gridCopy)
   }
 
   function colorChange(cellId: string, newColor: color) {
@@ -172,13 +176,13 @@ function initiateGrids(){
       })
       return newRow
     })
-    updateState(gridName, reColoredGrid)
+    updateGrid(gridName, reColoredGrid)
 
   }
 
   return (
 
-    <WeaveContext.Provider value={{ treadles, setTreadles,initiateGrids, setShafts, draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor, colorChange, setTieUpGrid, setTreadleGrid, setWarpGrid }}>
+    <WeaveContext.Provider value={{ updateGrid, setShafts, setTreadles, treadles, initiateGrids, draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor, colorChange }}>
       {children}
     </WeaveContext.Provider>
   )
