@@ -1,8 +1,9 @@
 //Context handling information and calculations between different parts (aka treadles, shafts, tieups) of the draft and calculates the weave.
 //dependencies
 import { createContext, useEffect, useState } from 'react'
+
+import { defaultColor, defaultDraftHeight, defaultDraftWidth, defaultShafts, defaultTreadles } from '@/constants/weaveDefaults'
 import { resizeGrid } from '@/functions/resizeGrid'
-import {defaultColor,defaultDraftHeight, defaultDraftWidth, defaultShafts, defaultTreadles } from '@/constants/weaveDefaults'
 
 //exports
 export const WeaveContext = createContext<WeaveContextType | null>(null)
@@ -31,17 +32,19 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   //Keeps grids updated on preferences change 
   useEffect(() => {
+  
+        setWarpGrid((prevValue)=>{return resizeGrid(prevValue, shafts, draftWidth)})
+        setTreadleGrid((prevValue)=>{ return resizeGrid(prevValue,draftHeight, treadles)})
+        setTieUpGrid((prevValue)=>{return resizeGrid(prevValue,shafts, treadles)}) 
 
-    setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
-    setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
-    setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0))) 
   }, [shafts, draftHeight, draftWidth, treadles])
+  
 
-function initiateGrids(){
-  if(!warpGrid) setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
-  if(!treadleGrid)  setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
-  if(!tieUpGrid) setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
-}
+  function initiateGrids() {
+    if (!warpGrid) setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
+    if (!treadleGrid) setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
+    if (!tieUpGrid) setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
+  }
 
   //Keeps the state for warpcolors on updated
   useEffect(() => {
@@ -70,27 +73,6 @@ function initiateGrids(){
     })
     setWeftColors(Array.from(new Set(uniqueColors)))
   }, [treadleGrid])
-
-/*   function resizeGrid(gridName: gridName, height: number = draftHeight, width: number = draftWidth) {
-    let emptySubArray: string[] = new Array(width).fill('', 0)
-
-    let gridCopy = copyGrid(gridName as gridName)
-
-    gridCopy.length > height ? gridCopy.splice(height) : gridCopy.fill(JSON.parse(JSON.stringify(emptySubArray)), gridCopy.length, height)
-
-    if (gridCopy[0].length < width) {
-      gridCopy.forEach(subarray => {
-        subarray.splice(width)
-      });
-    } else if (gridCopy[0].length > width) {
-      gridCopy.forEach(subarray => {
-        subarray.fill('', subarray.length, width)
-      });
-    }
-    setDraftheight(height)
-    setDraftwidth(width)
-    updateGrid(gridName, gridCopy)
-  } */
 
   //Returns a deepcopy of a grid by name
   function copyGrid(gridName: gridName) {
