@@ -36,7 +36,7 @@ export function Weave() {
       let warpColumn = []
       for (let i = 0; i < warpGrid.length; i++) {
 
-        warpColumn.push(warpGrid[i][x] || '')
+        warpColumn.push(warpGrid[i][x])
       }
       let warpColor = warpColumn.find(isColored)
 
@@ -47,7 +47,7 @@ export function Weave() {
     function getWarpedShaft(x: number) {
       if (!warpGrid) return
 
-      for (let i = 0; i < shafts; i++) {
+      for (let i = 0; i <= shafts; i++) {
         if (warpGrid[i][x] != '') {
           return i
         }
@@ -64,7 +64,7 @@ export function Weave() {
     //Copies weavestate and updates colors according to warp, treadling and tie-up, returns the updated weave
     function updateWeave(weave: grid): grid {
       //Resize if needed
-      let gridCopy = resizeGrid(weaveGrid, draftHeight, draftWidth) as grid
+      let gridCopy = resizeGrid(weave, draftHeight, draftWidth) as grid
 
 
       gridCopy.forEach((row: color[], y: number) => {
@@ -74,16 +74,21 @@ export function Weave() {
 
           let warpColor = getWarpColor(x)
 
-          if (!weftColor) {
+          if (weftColor == undefined) {
             //Set each cell with warpcolor to warpcolor, no color if no warp
-            warpColor ? gridCopy[y][x] = warpColor : gridCopy[y][x] = ''
+            warpColor != undefined ? gridCopy[y][x] = warpColor : gridCopy[y][x] = ''
+
           } else {
 
             if (warpColor) {
+
               let treadleNr = treadleGrid ? treadleGrid[y].indexOf(weftColor) : undefined
               let shaftNr = getWarpedShaft(x)
+
               //Check tie-up on pos y/x if colored set weft otherwise warp
-              if (shaftNr && treadleNr) isTiedUp(shaftNr, treadleNr) ? gridCopy[y][x] = weftColor : gridCopy[y][x] = warpColor
+              if (shaftNr != undefined && treadleNr != undefined) {
+                (isTiedUp(shaftNr, treadleNr)) ? gridCopy[y][x] = weftColor : gridCopy[y][x] = warpColor
+              }
             } else {
               //No warp but weftcolor displays weft
               gridCopy[y][x] = weftColor
@@ -95,7 +100,7 @@ export function Weave() {
 
     }
 
-    setWeaveGrid(prevValue => updateWeave(prevValue))
+    setWeaveGrid(prevValue => updateWeave(JSON.parse(JSON.stringify(prevValue))))
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [warpGrid, treadleGrid, tieUpGrid,])
