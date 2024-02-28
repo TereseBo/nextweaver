@@ -29,9 +29,7 @@ export function Weave() {
     //Returns the color of the warp for the requested position
     function getWarpColor(x: number) {
 
-      debugger
       if (!warpGrid) return
-
 
       let warpColumn = []
       for (let i = 0; i < warpGrid.length; i++) {
