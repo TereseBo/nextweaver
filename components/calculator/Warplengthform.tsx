@@ -6,12 +6,12 @@ import './warplengthform.scss'
 
 import { useState } from 'react'
 
-import { calculateNewWarpLength } from '@/functions/calculator/warplength'
+import { calculateNewWarpLength } from '@/components/calculator/functions/warplength'
 
 import { Formsection } from './Formsection'
 
 export function Warplengthform() {
-    const [warpData, setWarpData]= useState({
+    const [warpData, setWarpData] = useState({
         waste: 50,
         lash_on: 50,
         take_up: 10,
@@ -21,11 +21,11 @@ export function Warplengthform() {
     })
 
     //Recalculates and updates state on change in form
-    function formChangeHandler(e: React.ChangeEvent<HTMLFormElement>){
+    function formChangeHandler(e: React.ChangeEvent<HTMLFormElement>) {
         const inputValue = +e.target.value
         const fieldId = e.target.id
-        const newState = calculateNewWarpLength(fieldId, inputValue, {...warpData})
-             setWarpData(newState)
+        const newState = calculateNewWarpLength(fieldId, inputValue, { ...warpData })
+        setWarpData(newState)
     }
 
     return (

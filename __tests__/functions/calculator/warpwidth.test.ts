@@ -1,4 +1,4 @@
-import { calculateWarpEpc,calculateWarpWidth } from '@/functions/calculator/warpwidth'
+import { calculateWarpEpc, calculateWarpWidth } from '@/components/calculator/functions/warpwidth'
 
 
 describe('Basic calculations on warp width return expected result', () => {
