@@ -8,6 +8,7 @@ import { WeaveContext } from '@/contexts/weavecontext'
 import { toggleBool } from '@/functions/toggleBool'
 
 import { Downloadweave } from './filehandler/Downloadweave'
+import { Uploadweave } from './filehandler/Uploadweave'
 import { Yarnlist } from './forms/Yarnlist'
 import { Warpwidthform } from '../calculator/Warpwidthform'
 import { SecondaryMenu } from '../zSharedComponents/SecondaryMeny'
@@ -49,6 +50,7 @@ export function ProjectOptions() {
                 {displayWarp ? <button onClick={warpClickhandler}>Hide warp info</button> : <button onClick={warpClickhandler}>Add warp info</button>}
                 {/* TODO: Add save button options after implementing logIn <button>Save draft</button> */}
                 <Downloadweave/>
+                <Uploadweave/>
 
             </SecondaryMenu>
             <div className='optional-content'>
