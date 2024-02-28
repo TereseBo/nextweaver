@@ -1,14 +1,14 @@
-import { defaultDraftHeight, defaultTreadles,defaultWeftColor } from '@/constants/weaveDefaults'
+import { defaultDraftHeight, defaultTreadles, defaultWeftColor } from '@/constants/weaveDefaults'
 
 import { createGrid, getHighest } from '../utils'
 
 
-export function readWeft(weft: TreadlingDescription, height:number) {
+export function readWeft(weft: TreadlingDescription, height: number) {
 
     let width = weft.count || defaultTreadles
-    let weftGrid = createGrid(width, height)
+    let weftGrid: grid = createGrid(width, height)
 
-    if (weft.pattern== null ||!(weft.pattern.length > 0)) {
+    if (weft.pattern == null || !(weft.pattern.length > 0)) {
         return weftGrid
     }
 
@@ -25,6 +25,18 @@ export function readWeft(weft: TreadlingDescription, height:number) {
         }
         weftGrid[index][treadle] = currentColor
     })
+
+    //Adjust the filled in treadling to the bottom (where tie-up is) if needed
+    let lastIndex = weftGrid.length - 1
+
+    for (let i = lastIndex; i >= 0; i--) {
+
+        if (weftGrid[lastIndex].find(element => element != '')) {
+            return weftGrid
+        } else {
+            weftGrid.unshift(weftGrid.pop() as color[])
+        }
+    }
 
     return weftGrid
 
