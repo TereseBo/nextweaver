@@ -1,12 +1,12 @@
 //Contains load button to collect from db
-import './uploadweave.scss'
+
 
 import { useContext, useState } from 'react'
 
 import { readWeaveObject } from '@/components/draft/filehandler/functions/set/readWeaveObject'
 import { WeaveContext } from '@/contexts/weavecontext'
 
-export function Uploadweave() {
+export function DbLoadWeave() {
     const { updateGrid } = useContext(WeaveContext) as WeaveContextType
     const [displayInput, setDisplayInput] = useState<boolean>(false)
 

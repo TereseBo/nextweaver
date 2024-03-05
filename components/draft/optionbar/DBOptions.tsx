@@ -1,11 +1,11 @@
-import { DbSaveWeave } from '@/components/draft/filehandler/Downloadweave'
-import { DbLoadweave } from '@/components/draft/filehandler/Uploadweave'
-export function FileOptions() {
+import { DbLoadWeave } from '@/components/draft/dbhandler/DbLoadWeave'
+import { DbSaveWeave } from '@/components/draft/dbhandler/DbSaveWeave'
+export function DbOptions() {
 
     return (
         <>
             <DbSaveWeave />
-            <DbLoadweave />
+            <DbLoadWeave />
         </>
     )
 }
