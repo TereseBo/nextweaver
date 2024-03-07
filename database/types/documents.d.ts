@@ -2,23 +2,23 @@ import { ObjectId } from 'mongodb';
 import * as mongoDB from 'mongodb'
 
 interface User extends mongoDB.Document {
-    _id: ObjectId;
+    _id?: ObjectId;
     name: string
     userId: string
 }
 
 interface Draft extends mongoDB.Document {
-    _id: ObjectId,
+    _id?: ObjectId,
     userId: string,
     name: string,
     weave: WeaveObject,
-    created: Date,
-    updated: Date,
+    created: number,
+    updated: number,
     public: Boolean
 }
 
 interface Loom extends mongoDB.Document {
-    _id: ObjectId,
+    _id?: ObjectId,
     userId: string,
     shafts: number,
     treadles: number,
@@ -26,7 +26,7 @@ interface Loom extends mongoDB.Document {
 }
 
 interface Reed extends mongoDB.Document {
-    _id: ObjectId,
+    _id?: ObjectId,
     userId: string,
     dents: number,
     section: number,
@@ -34,4 +34,4 @@ interface Reed extends mongoDB.Document {
     length: number
 }
 
-export type { Draft, Loom, Reed,User }
+export type { Draft, Loom, Reed, User }
