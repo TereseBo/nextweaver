@@ -1,17 +1,19 @@
 //Context handling information and calculations between different parts (aka treadles, shafts, tieups) of the draft and calculates the weave.
 //dependencies
-
 import { createContext, useEffect, useState } from 'react'
+
+import { defaultColor, defaultDraftHeight, defaultDraftWidth, defaultShafts, defaultTreadles } from '@/constants/weaveDefaults'
+import { resizeGrid } from '@/functions/resizeGrid'
 
 //exports
 export const WeaveContext = createContext<WeaveContextType | null>(null)
 
 export function WeaveProvider({ children }: { children: React.ReactElement | React.ReactElement[] }) {
   //States used in grid creation
-  const [draftHeight, setDraftheight] = useState<number>(50)
-  const [draftWidth, setDraftwidth] = useState<number>(30)
-  const [shafts, setShafts] = useState<number>(8)
-  const [treadles, setTreadles] = useState<number>(6)
+  const [draftHeight, setDraftheight] = useState<number>(defaultDraftHeight)
+  const [draftWidth, setDraftwidth] = useState<number>(defaultDraftWidth)
+  const [shafts, setShafts] = useState<number>(defaultShafts)
+  const [treadles, setTreadles] = useState<number>(defaultTreadles)
 
   //Inital grids are empty, representing no color filled in 
   const [warpGrid, setWarpGrid] = useState<grid>()
@@ -26,19 +28,23 @@ export function WeaveProvider({ children }: { children: React.ReactElement | Rea
 
   const [warpColors, setWarpColors] = useState<colorCollection>([])
   const [weftColors, setWeftColors] = useState<colorCollection>([])
-  const [currentColor, setCurrentColor] = useState<color>('#000000')
+  const [currentColor, setCurrentColor] = useState<color>(defaultColor)
 
   //Keeps grids updated on preferences change 
   useEffect(() => {
-    setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
-    setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
-    setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
+  
+        setWarpGrid((prevValue)=>{return resizeGrid(prevValue, shafts, draftWidth)})
+        setTreadleGrid((prevValue)=>{ return resizeGrid(prevValue,draftHeight, treadles)})
+        setTieUpGrid((prevValue)=>{return resizeGrid(prevValue,shafts, treadles)}) 
+
   }, [shafts, draftHeight, draftWidth, treadles])
-function initiateGrids(){
-  if(!warpGrid) setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
-  if(!treadleGrid)  setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
-  if(!tieUpGrid) setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
-}
+  
+
+  function initiateGrids() {
+    if (!warpGrid) setWarpGrid(new Array(shafts).fill(new Array(draftWidth).fill('', 0)))
+    if (!treadleGrid) setTreadleGrid(new Array(draftHeight).fill(new Array(treadles).fill('', 0)))
+    if (!tieUpGrid) setTieUpGrid(new Array(shafts).fill(new Array(treadles).fill('', 0)))
+  }
 
   //Keeps the state for warpcolors on updated
   useEffect(() => {
@@ -68,27 +74,6 @@ function initiateGrids(){
     setWeftColors(Array.from(new Set(uniqueColors)))
   }, [treadleGrid])
 
-  function resizeGrid(gridName: gridName, height: number = draftHeight, width: number = draftWidth) {
-    let emptySubArray: string[] = new Array(width).fill('', 0)
-
-    let gridCopy = copyGrid(gridName as gridName)
-
-    gridCopy.length > height ? gridCopy.splice(height) : gridCopy.fill(JSON.parse(JSON.stringify(emptySubArray)), gridCopy.length, height)
-
-    if (gridCopy[0].length < width) {
-      gridCopy.forEach(subarray => {
-        subarray.splice(width)
-      });
-    } else if (gridCopy[0].length > width) {
-      gridCopy.forEach(subarray => {
-        subarray.fill('', subarray.length, width)
-      });
-    }
-    setDraftheight(height)
-    setDraftwidth(width)
-    updateState(gridName, gridCopy)
-  }
-
   //Returns a deepcopy of a grid by name
   function copyGrid(gridName: gridName) {
     let gridCopy = []
@@ -108,14 +93,18 @@ function initiateGrids(){
   }
 
   //Accepts the name and new value of a grid and updates this state accordingly
-  function updateState(gridName: gridName, newValue: grid) {
+  function updateGrid(gridName: gridName, newValue: grid) {
     //Updates the named grid with the supplied value
     switch (gridName) {
       case 'warp':
+        setDraftwidth(newValue[0].length)
+        setShafts(newValue.length)
         setWarpGrid(newValue)
         break
       case 'weft':
       case 'treadle':
+        setDraftheight(newValue.length)
+        setTreadles(newValue[0].length)
         setTreadleGrid(newValue)
         break
       case 'tieup':
@@ -158,7 +147,7 @@ function initiateGrids(){
 
     gridCopy[y][x] = gridCopy[y][x] == '' ? newColor : ''
     //State is updated
-    updateState(gridName, gridCopy)
+    updateGrid(gridName, gridCopy)
   }
 
   function colorChange(cellId: string, newColor: color) {
@@ -171,13 +160,13 @@ function initiateGrids(){
       })
       return newRow
     })
-    updateState(gridName, reColoredGrid)
+    updateGrid(gridName, reColoredGrid)
 
   }
 
   return (
 
-    <WeaveContext.Provider value={{ treadles, setTreadles,initiateGrids, setShafts, draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor, colorChange }}>
+    <WeaveContext.Provider value={{ updateGrid, setShafts, setTreadles, treadles, initiateGrids, draftHeight, draftWidth, treadleGrid, warpGrid, tieUpGrid, updateCell, shafts, warpColors, weftColors, currentColor, setCurrentColor, colorChange }}>
       {children}
     </WeaveContext.Provider>
   )

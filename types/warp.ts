@@ -26,9 +26,9 @@ type WeaveContextType={
     draftHeight:number,
     draftWidth: number,
     shafts:number,
-    setShafts:( newValue:number)=>void,
+   setShafts:( newValue:number)=>void,
     treadles:number,
-    setTreadles:(newValue:number)=>void,
+   setTreadles:(newValue:number)=>void,
    // reSizeGrid:(gridName: gridName, height: number, width: number)=>void
     //Related to color
     warpColors:colorCollection,
@@ -38,6 +38,7 @@ type WeaveContextType={
     setCurrentColor:(newColor:color)=>void,
     colorChange:(previousColorId:string, previousColor:color)=>void,
     initiateGrids:()=>void,
+    updateGrid:(name:gridName, newValue:grid)=>void,
 /*     resizeGrid:(gridName:string, width:number, height:number)=> void,
     updateGrid:(x:number, y:number, color:color)=> void, */
 /*     updateWarp:(width:number, height:number)=> void, 
