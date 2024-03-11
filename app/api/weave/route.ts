@@ -11,9 +11,22 @@ export async function GET(
     req: Request,
 
 ) {
-    try {
+    const { userId } = auth();
+    if (!userId) {
+        return new NextResponse('Unauthorized', { status: 401 });
+    }
 
-        return NextResponse.json('Reached route api/[user]/weaves/[tag]', { status: 200 });
+    try {
+        const db = await dbConnection() as Db
+        let dbResponse = await db.collection('drafts').findOne({userId:userId})
+        console.log(dbResponse)
+        if(!dbResponse){
+            return new NextResponse('No such weave found', { status: 204 });
+        }
+        console.log(dbResponse.weave)
+        let weaveObject=dbResponse.weave
+
+        return NextResponse.json({weaveObject}, { status: 200 });
     } catch (error) {
         console.log('api/filehandler', error);
         return new NextResponse(
@@ -28,13 +41,13 @@ export async function POST(
     req: Request,
 
 ) {
-    const user = await currentUser();
-    
+
+
     const { userId } = auth();
     if (!userId) {
         return new NextResponse('Unauthorized', { status: 401 });
     }
-console.log(user)
+
     try {
 
         const db = await dbConnection() as Db

@@ -22,7 +22,8 @@ export function Uploadweave() {
                     let fileContents = readE.target.result as string
                     const obj:WeaveObject = JSON.parse(fileContents);
                     let newGrids = readWeaveObject(obj)
-
+                        
+                    //TODO: Move to context
                     updateGrid('tieup', newGrids.tieupGrid)
                     updateGrid('warp', newGrids.warpGrid)
                     updateGrid('weft', newGrids.treadleGrid)
