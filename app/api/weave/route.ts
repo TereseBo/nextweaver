@@ -1,7 +1,6 @@
 
 //Route for actions on single weaves owned by a user
 import { auth } from '@clerk/nextjs';
-import { currentUser } from '@clerk/nextjs';
 import { Db } from 'mongodb';
 import { NextResponse } from 'next/server';
 
@@ -18,19 +17,19 @@ export async function GET(
 
     try {
         const db = await dbConnection() as Db
-        let dbResponse = await db.collection('drafts').findOne({userId:userId})
+        let dbResponse = await db.collection('drafts').findOne({ userId: userId })
         console.log(dbResponse)
-        if(!dbResponse){
+        if (!dbResponse) {
             return new NextResponse('No such weave found', { status: 204 });
         }
         console.log(dbResponse.weave)
-        let weaveObject=dbResponse.weave
+        let weaveObject = dbResponse.weave
 
-        return NextResponse.json({weaveObject}, { status: 200 });
+        return NextResponse.json({ weaveObject }, { status: 200 });
     } catch (error) {
         console.log('api/filehandler', error);
         return new NextResponse(
-            'Ooops, something went wrong when getting the route',
+            'Ooops, something went very wrong on the server',
             { status: 500 }
         );
     }
