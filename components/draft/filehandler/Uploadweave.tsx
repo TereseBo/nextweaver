@@ -7,13 +7,10 @@ import { WeaveContext } from '@/contexts/weavecontext'
 import { toggleBool } from '@/functions/toggleBool'
 
 import { readWeaveObject } from './functions/set/readWeaveObject'
-
 export function Uploadweave() {
     const { updateGrid } = useContext(WeaveContext) as WeaveContextType
     const [displayInput, setDisplayInput] = useState<boolean>(false)
-
     function upLoadHandler(e: React.ChangeEvent<HTMLInputElement>): void {
-
         if (e.target.files) {
             var reader = new FileReader();
             reader.onload = (readE) => {
@@ -23,6 +20,7 @@ export function Uploadweave() {
                     const obj:WeaveObject = JSON.parse(fileContents);
                     let newGrids = readWeaveObject(obj)
 
+                    //TODO: Move to context
                     updateGrid('tieup', newGrids.tieupGrid)
                     updateGrid('warp', newGrids.warpGrid)
                     updateGrid('weft', newGrids.treadleGrid)
@@ -30,14 +28,12 @@ export function Uploadweave() {
                         //TODO:remove log, replace alertbox
                         console.log(error)
                         alert('Please use a different file')
-
                     }
                 }
             }
             reader.readAsText(e.target.files[0]);
         }
     }
-
     return (
         <>
             <button id="uploadButton" onClick={() => setDisplayInput(toggleBool(displayInput))}>Upload
@@ -46,7 +42,5 @@ export function Uploadweave() {
             <input className="weave-file" type='file' onChange={(e) => upLoadHandler(e)} name='weaveObject'></input>
             </button> 
         </>
-
     )
-
 }
