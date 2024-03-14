@@ -1,0 +1,12 @@
+.openForm {
+    display: flex;
+    flex-direction: row !important;
+    width: fit-content;
+    position: absolute;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+
+}
