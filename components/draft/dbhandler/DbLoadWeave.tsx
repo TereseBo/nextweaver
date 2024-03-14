@@ -11,13 +11,12 @@ export function DbLoadWeave() {
 
 
     async function clickhandler() {
-        console.log('I did stuff')
+  
         try {
             let response = await fetch('/api/weave')
             const body = await response.json();
-            console.log(body)
+
             const { weaveObject } = body
-            console.log(weaveObject)
             
             upSetGrids(weaveObject)
 
