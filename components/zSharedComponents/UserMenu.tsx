@@ -3,11 +3,11 @@
 import './userMenu.scss'
 
 import { UserButton } from '@clerk/nextjs';
-import { auth, } from '@clerk/nextjs';
+import { useAuth, } from '@clerk/nextjs';
 import Link from 'next/link'
 
 export function UserMenu() {
-    const { userId } = auth();
+    const { userId } = useAuth();
 
     return (
         <div className='usermenu-container'>
