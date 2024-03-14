@@ -6,12 +6,11 @@ import { useContext, useEffect, useRef } from 'react'
 
 import { Warpwidthform } from '@/components/calculator/Warpwidthform'
 import { Yarnlist } from '@/components/draft/forms/Yarnlist'
+import { DbOptions } from '@/components/draft/optionbar/DbOptions'
+import { FileOptions } from '@/components/draft/optionbar/FileOptions'
 import { SecondaryMenu } from '@/components/zSharedComponents/SecondaryMeny'
 import { WeaveContext } from '@/contexts/weavecontext'
 import { toggleBool } from '@/functions/toggleBool'
-
-import { DbOptions } from './DbOptions'
-import { FileOptions } from './FileOptions'
 export function ProjectOptions() {
     //State controls if yarnlist and warpeidth form are to be seen in the draftpage
     const [displayYarn, setDisplayYarn] = useState(false)
