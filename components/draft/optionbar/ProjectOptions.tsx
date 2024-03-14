@@ -1,8 +1,10 @@
 //Contains logic for optional additions to draftpage,mainly intended for use when planning a weaving project and printing the draft
+'use-client'
 import './ProjectOptions.scss'
 
 import { useState } from 'react'
 import { useContext, useEffect, useRef } from 'react'
+import { useAuth, } from '@clerk/nextjs';
 
 import { Warpwidthform } from '@/components/calculator/Warpwidthform'
 import { Yarnlist } from '@/components/draft/forms/Yarnlist'
@@ -10,8 +12,10 @@ import { SecondaryMenu } from '@/components/zSharedComponents/SecondaryMeny'
 import { WeaveContext } from '@/contexts/weavecontext'
 import { toggleBool } from '@/functions/toggleBool'
 
-import { DbOptions } from './DbOptions'
+import { DbOptions } from './DBOptions'
 import { FileOptions } from './FileOptions'
+
+
 export function ProjectOptions() {
     //State controls if yarnlist and warpeidth form are to be seen in the draftpage
     const [displayYarn, setDisplayYarn] = useState(false)
@@ -19,7 +23,11 @@ export function ProjectOptions() {
 
     const { weftColors, warpColors } = useContext(WeaveContext) as WeaveContextType
 
+    //Ref is used to scroll when elements are added to the bottom of the page
     const bottomRef = useRef<HTMLDivElement>(null);
+
+    //The options for save/load depends on if user is logged in
+    const { isSignedIn } = useAuth();
 
     //Use effect keeps page scrolled to the bottom on changes in content of the project options
     useEffect(() => {
@@ -45,11 +53,12 @@ export function ProjectOptions() {
     return (
         <div>
             <SecondaryMenu>
+                {/* Controls for optional content */}
                 {displayYarn ? <button onClick={yarnClickhandler}>Hide yarn list</button> : <button onClick={yarnClickhandler}>Add yarn list</button>}
                 {displayWarp ? <button onClick={warpClickhandler}>Hide warp info</button> : <button onClick={warpClickhandler}>Add warp info</button>}
-                {/* TODO: Add save button options after implementing logIn <button>Save draft</button> */}
-                <FileOptions /> <DbOptions/>
-
+                
+                {/* Save options */}
+                {isSignedIn ? <DbOptions /> : <FileOptions />}
             </SecondaryMenu>
             <div className='optional-content'>
                 {displayYarn ? <Yarnlist content={warpColors} heading={'Warp'} /> : null}
