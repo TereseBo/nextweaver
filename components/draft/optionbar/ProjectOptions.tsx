@@ -10,7 +10,7 @@ import { SecondaryMenu } from '@/components/zSharedComponents/SecondaryMeny'
 import { WeaveContext } from '@/contexts/weavecontext'
 import { toggleBool } from '@/functions/toggleBool'
 
-import { DbOptions } from './DbOptions'
+import { DBOptions } from './DBOptions'
 import { FileOptions } from './FileOptions'
 export function ProjectOptions() {
     //State controls if yarnlist and warpeidth form are to be seen in the draftpage
@@ -48,7 +48,7 @@ export function ProjectOptions() {
                 {displayYarn ? <button onClick={yarnClickhandler}>Hide yarn list</button> : <button onClick={yarnClickhandler}>Add yarn list</button>}
                 {displayWarp ? <button onClick={warpClickhandler}>Hide warp info</button> : <button onClick={warpClickhandler}>Add warp info</button>}
                 {/* TODO: Add save button options after implementing logIn <button>Save draft</button> */}
-                <FileOptions /> <DbOptions/>
+                <FileOptions /> <DBOptions/>
 
             </SecondaryMenu>
             <div className='optional-content'>
