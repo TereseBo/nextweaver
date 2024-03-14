@@ -18,7 +18,6 @@ export function DbSaveWeave() {
         console.log(weaveObject)
         const body = { values: { weaveObject, user: 'Tess', name: 'One' } }
         fetch('/api/weave', {
-             cache: 'no-store', 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

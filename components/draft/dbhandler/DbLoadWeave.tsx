@@ -13,7 +13,7 @@ export function DbLoadWeave() {
     async function clickhandler() {
   
         try {
-            let response = await fetch('/api/weave', { cache: 'no-store' })
+            let response = await fetch('/api/weave')
             const body = await response.json();
 
             const { weaveObject } = body
