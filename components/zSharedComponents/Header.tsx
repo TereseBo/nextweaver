@@ -26,4 +26,4 @@ export function Header(params: { title: string, text: string }) {
             </nav>
         </header>
     )
-}
+}                                    
