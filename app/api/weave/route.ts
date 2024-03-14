@@ -10,6 +10,7 @@ export async function GET(
     req: Request,
 
 ) {
+    //Fetches one weave for the user
     const { userId } = auth();
     if (!userId) {
         return new NextResponse('Unauthorized', { status: 401 });
@@ -20,7 +21,7 @@ export async function GET(
         let dbResponse = await db.collection('drafts').findOne({ userId: userId })
         console.log(dbResponse)
         if (!dbResponse) {
-            return new NextResponse('No such weave found', { status: 204 });
+            return new NextResponse('You have no saved weaves', { status: 204 });
         }
         console.log(dbResponse.weave)
         let weaveObject = dbResponse.weave
@@ -40,8 +41,7 @@ export async function POST(
     req: Request,
 
 ) {
-
-
+    
     const { userId } = auth();
     if (!userId) {
         return new NextResponse('Unauthorized', { status: 401 });
