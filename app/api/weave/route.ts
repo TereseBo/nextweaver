@@ -6,7 +6,6 @@ import { NextResponse } from 'next/server';
 import { getDraft, saveDraft } from '../utils/handleWeave';
 
 export async function GET(
-    req: Request,
 
 ) {
     //Fetches one weave for the user
