@@ -1,8 +1,8 @@
 import './page.scss'
 
-import { Warplengthform } from '@/components/calculator/Warplengthform'
-import { Warpwidthform } from '@/components/calculator/Warpwidthform'
-import { Header } from '@/components/zSharedComponents/Header'
+import { Warplengthform } from '@/app/components/calculator/Warplengthform'
+import { Warpwidthform } from '@/app/components/calculator/Warpwidthform'
+import { Header } from '@/app/components/zSharedComponents/Header'
 export default function CalculatorPage() {
     return (
         <div id='calculator-page'>

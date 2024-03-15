@@ -1,0 +1,5 @@
+@use '@/app/resources/style/mixins.scss' as m;
+.cell{
+ @include m.base-thread;
+}
+
